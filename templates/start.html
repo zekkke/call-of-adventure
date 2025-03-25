@@ -2,17 +2,110 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Старт гри</title>
+  <title>Call of Adventure — Вибір персонажа</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url("/static/img/bg.png") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+    }
+
+    .logo {
+      margin-top: 20px;
+    }
+
+    .logo img {
+      width: 300px;
+    }
+
+    .intro {
+      margin: 20px auto;
+      padding: 10px;
+      max-width: 600px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    .character-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px auto;
+      max-width: 1000px;
+    }
+
+    .character {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid white;
+      border-radius: 12px;
+      padding: 15px;
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .character:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .character img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .char-name {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>Обери свого персонажа</h1>
-  <button onclick="selectClass('Воїн')">🛡️ Воїн</button>
-  <button onclick="selectClass('Маг')">🧙 Маг</button>
-  <button onclick="selectClass('Розбійник')">🗡️ Розбійник</button>
+  <div class="logo">
+    <img src="/static/img/logo.png" alt="Call of Adventure">
+  </div>
+
+  <div class="intro">
+    <h2>Обери свого персонажа</h2>
+    <p>Кожен має свої унікальні характеристики, що впливатимуть на результат пригоди.</p>
+  </div>
+
+  <div class="character-grid">
+    <div class="character" onclick="selectCharacter('воїн')">
+      <img src="/static/img/warrior.png" alt="воїн">
+      <div class="char-name">Воїн</div>
+    </div>
+    <div class="character" onclick="selectCharacter('асасін')">
+      <img src="/static/img/assassin.png" alt="асасін">
+      <div class="char-name">Асасін</div>
+    </div>
+    <div class="character" onclick="selectCharacter('вампір')">
+      <img src="/static/img/vampir.png" alt="вампір">
+      <div class="char-name">Вампір</div>
+    </div>
+    <div class="character" onclick="selectCharacter('двaрф')">
+      <img src="/static/img/dwarf.png" alt="дварф">
+      <div class="char-name">Дварф</div>
+    </div>
+    <div class="character" onclick="selectCharacter('ельф')">
+      <img src="/static/img/elf.png" alt="ельф">
+      <div class="char-name">Ельф</div>
+    </div>
+    <div class="character" onclick="selectCharacter('маг')">
+      <img src="/static/img/mage.png" alt="маг">
+      <div class="char-name">Маг</div>
+    </div>
+  </div>
 
   <script>
-    function selectClass(chosenClass) {
-      localStorage.setItem("class", chosenClass);
+    function selectCharacter(name) {
+      localStorage.setItem('selectedCharacter', name);
       window.location.href = "/game";
     }
   </script>
