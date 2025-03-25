@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>AI Підземелля</title>
+  <title>Call Of Adventure</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -27,7 +27,7 @@
   <button onclick="sendAction()">Спробувати</button>
 
   <script>
-    const character = localStorage.getItem("character");
+    const character = localStorage.getItem("selectedCharacter") || "герой";
     document.getElementById("hero").innerText = "Обраний персонаж: " + character;
     document.getElementById("intro").innerText = localStorage.getItem("intro");
 
