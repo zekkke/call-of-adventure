@@ -8,11 +8,47 @@
       font-family: Arial, sans-serif;
       max-width: 700px;
       margin: auto;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    h2 {
+      color: #333;
+    }
+    #intro {
+      font-style: italic;
+      color: #555;
+    }
+    #log {
+      white-space: pre-line;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      min-height: 200px;
+      max-height: 400px;
+      overflow-y: auto;
     }
     textarea {
       width: 100%;
       height: 80px;
       margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
@@ -27,9 +63,16 @@
   <button onclick="sendAction()">Спробувати</button>
 
   <script>
+    // Перевірка, чи є intro і персонаж
     const character = localStorage.getItem("selectedCharacter") || "герой";
+    const intro = localStorage.getItem("intro");
+
+    if (!intro || !character) {
+      alert("Спочатку оберіть персонажа!");
+      window.location.href = "/";
+    }
     document.getElementById("hero").innerText = "Обраний персонаж: " + character;
-    document.getElementById("intro").innerText = localStorage.getItem("intro");
+    document.getElementById("intro").innerText = intro;
 
     function estimateDifficulty(action) {
       const simple = ["запалити", "узяти", "відкрити", "оглянути", "підібрати"];
@@ -37,10 +80,10 @@
       const hard = ["переконати", "знищити", "вивести з рівноваги", "обдурити", "протиснутися силою"];
       const text = action.toLowerCase();
 
-      if (hard.some(word => text.includes(word))) return 18;
-      if (medium.some(word => text.includes(word))) return 12;
+      if (hard.some(word => text.includes(word))) return 15;
+      if (medium.some(word => text.includes(word))) return 10;
       if (simple.some(word => text.includes(word))) return 6;
-      return 10; // стандарт
+      return 2; // стандарт
     }
 
     async function sendAction() {
@@ -52,14 +95,24 @@
 
       log(`\n> Ти пробуєш: ${action}\nКидок d20: ${dice} (складність: ${difficulty})`);
 
-      const response = await fetch("/gpt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action, dice_result: dice, difficulty, character })
-      });
+      try {
+        const response = await fetch("/gpt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action, dice_result: dice, difficulty, character })
+        });
 
-      const data = await response.json();
-      log(data.reply);
+        const data = await response.json();
+        if (data.error) {
+          log(`Помилка: ${data.error}`);
+          return;
+        }
+
+        log(data.reply);
+      } catch (error) {
+        log(`Помилка під час запиту до сервера: ${error.message}`);
+      }
+
       document.getElementById("action").value = "";
     }
 
