@@ -2,66 +2,71 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>D20 GPT Dungeon</title>
+  <title>AI Підземелля</title>
   <style>
-    body { font-family: Arial; font-size: 18px; padding: 20px; }
-    #log { border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: auto; background: #fefefe; margin-bottom: 20px; }
-    #action { width: 80%; font-size: 18px; padding: 6px; }
-    button { font-size: 18px; padding: 6px 10px; margin: 5px; }
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: auto;
+    }
+    textarea {
+      width: 100%;
+      height: 80px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
-  <h1>AI Підземелля</h1>
-  <div><strong>Клас:</strong> <span id="player-class"></span> | <strong>HP:</strong> <span id="hp">100</span></div>
-  <div id="log"></div>
-  <input id="action" placeholder="Що ти робиш?" />
+  <h2 id="hero"></h2>
+  <p><strong>Твоя ціль:</strong> <span id="intro"></span></p>
+
+  <div id="log" style="white-space: pre-line; border-top: 1px solid #ccc; padding-top: 10px;"></div>
+
+  <hr>
+  <textarea id="action" placeholder="Що ти робиш?"></textarea>
   <button onclick="sendAction()">Спробувати</button>
 
   <script>
-    let playerClass = localStorage.getItem("class") || "Безіменний";
-    let hp = 100;
-    document.getElementById("player-class").textContent = playerClass;
+    const character = localStorage.getItem("character");
+    document.getElementById("hero").innerText = "Обраний персонаж: " + character;
+    document.getElementById("intro").innerText = localStorage.getItem("intro");
 
     function estimateDifficulty(action) {
-      const easy = ["запалити", "підняти", "підійти", "оглянути"];
-      const medium = ["стрибнути", "переконати", "перемогти", "вкрасти"];
-      const hard = ["обдурити бога", "перемогти дракона", "стрибнути в прірву і вижити"];
-      action = action.toLowerCase();
-      if (easy.some(word => action.includes(word))) return 8;
-      if (medium.some(word => action.includes(word))) return 12;
-      if (hard.some(word => action.includes(word))) return 18 + Math.floor(Math.random() * 3);
-      return 8;
+      const simple = ["запалити", "узяти", "відкрити", "оглянути", "підібрати"];
+      const medium = ["перестрибнути", "перелізти", "вкрасти", "сховатися"];
+      const hard = ["переконати", "знищити", "вивести з рівноваги", "обдурити", "протиснутися силою"];
+      const text = action.toLowerCase();
+
+      if (hard.some(word => text.includes(word))) return 18;
+      if (medium.some(word => text.includes(word))) return 12;
+      if (simple.some(word => text.includes(word))) return 6;
+      return 10; // стандарт
     }
 
     async function sendAction() {
       const action = document.getElementById("action").value;
-      const difficulty = estimateDifficulty(action);
+      if (!action.trim()) return;
+
       const dice = Math.floor(Math.random() * 20) + 1;
-      appendLog(`> Ти пробуєш: ${action}`);
-      appendLog(`Кидок d20: ${dice} (складність: ${difficulty})`);
-      const success = dice >= difficulty;
-      if (!success) {
-        const damage = Math.floor(Math.random() * 10) + 5;
-        hp -= damage;
-        if (hp < 0) hp = 0;
-        document.getElementById("hp").textContent = hp;
-        appendLog(`❌ Провал! Ти втрачаєш ${damage} HP.`);
-      } else {
-        appendLog("✅ Успіх!");
-      }
+      const difficulty = estimateDifficulty(action);
+
+      log(`\n> Ти пробуєш: ${action}\nКидок d20: ${dice} (складність: ${difficulty})`);
+
       const response = await fetch("/gpt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action, dice_result: dice, difficulty })
+        body: JSON.stringify({ action, dice_result: dice, difficulty, character })
       });
+
       const data = await response.json();
-      appendLog(data.reply);
+      log(data.reply);
+      document.getElementById("action").value = "";
     }
 
-    function appendLog(text) {
-      const log = document.getElementById("log");
-      log.innerHTML += `<p>${text}</p>`;
-      log.scrollTop = log.scrollHeight;
+    function log(text) {
+      const logDiv = document.getElementById("log");
+      logDiv.innerText += text + "\n";
+      logDiv.scrollTop = logDiv.scrollHeight;
     }
   </script>
 </body>
