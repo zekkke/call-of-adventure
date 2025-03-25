@@ -77,26 +77,31 @@
   </div>
 
   <div class="character-grid">
-    <div class="char-card" onclick="selectCharacter('воїн')">
+    <div class="character" onclick="selectCharacter('воїн')">
         <img src="/static/img/warrior.png" alt="Воїн">
         <div class="char-name">Воїн</div>
       </div>
-    <div class="char-card" onclick="selectCharacter('асасін')">
+
+    <div class="character" onclick="selectCharacter('асасін')">
         <img src="/static/img/assassin.png" alt="Асасін">
         <div class="char-name">Асасін</div>
       </div>
+
     <div class="character" onclick="selectCharacter('вампір')">
       <img src="/static/img/vampir.png" alt="вампір">
       <div class="char-name">Вампір</div>
     </div>
+
     <div class="character" onclick="selectCharacter('двaрф')">
       <img src="/static/img/dwarf.png" alt="дварф">
       <div class="char-name">Дварф</div>
     </div>
+
     <div class="character" onclick="selectCharacter('ельф')">
       <img src="/static/img/elf.png" alt="ельф">
       <div class="char-name">Ельф</div>
     </div>
+
     <div class="character" onclick="selectCharacter('маг')">
       <img src="/static/img/mage.png" alt="маг">
       <div class="char-name">Маг</div>
@@ -104,10 +109,32 @@
   </div>
 
   <script>
-    function selectCharacter(name) {
+    async function selectCharacter(name) {
+      // Зберігаємо обраного персонажа
       localStorage.setItem('selectedCharacter', name);
-      localStorage.setItem("characterStats", JSON.stringify(stats));
-      window.location.href = "/game";
+
+      // Робимо запит до /start_prompt для отримання вступної пригоди
+      try {
+        const response = await fetch("/start_prompt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ character: name })
+        });
+
+        const data = await response.json();
+        if (data.error) {
+          alert("Помилка: " + data.error);
+          return;
+        }
+
+        // Зберігаємо вступну пригоду в localStorage
+        localStorage.setItem("intro", data.intro);
+
+        // Перенаправляємо на сторінку гри
+        window.location.href = "/game";
+      } catch (error) {
+        alert("Помилка під час запиту до сервера: " + error.message);
+      }
     }
   </script>
 </body>
