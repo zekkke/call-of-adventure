@@ -34,7 +34,7 @@ def start_prompt():
 Не описуй ще розвиток подій — лише атмосферний вступ у фентезійному стилі. Уникай повторень. Кожного разу — інша пригода.
 '''
 
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel("gemini-2.0-flash")
     response = model.generate_content(prompt)
     return jsonify({"intro": response.text.strip()})
 
@@ -55,7 +55,7 @@ def gpt_response():
 Опиши наслідок цієї дії коротко (до 5-6 речень), у фентезійному стилі. Не описуй нову ціль — лише реакцію на дію.
 """
 
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel("gemini-2.0-flash")
     response = model.generate_content(prompt)
     return jsonify({ "reply": response.text.strip() })
 
