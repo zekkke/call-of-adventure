@@ -66,6 +66,8 @@
     // Перевірка, чи є intro і персонаж
     const character = localStorage.getItem("selectedCharacter") || "герой";
     const intro = localStorage.getItem("intro");
+    const stats = JSON.parse(localStorage.getItem("characterStats")) || { strength: 0, dexterity: 0, intelligence: 0, charisma: 0 };
+
 
     if (!intro || !character) {
       alert("Спочатку оберіть персонажа!");
@@ -74,32 +76,87 @@
     document.getElementById("hero").innerText = "Обраний персонаж: " + character;
     document.getElementById("intro").innerText = intro;
 
-    function estimateDifficulty(action) {
-      const simple = ["запалити", "узяти", "відкрити", "оглянути", "підібрати"];
-      const medium = ["перестрибнути", "перелізти", "вкрасти", "сховатися"];
-      const hard = ["переконати", "знищити", "вивести з рівноваги", "обдурити", "протиснутися силою"];
-      const text = action.toLowerCase();
+    function estimateDifficultyAndStat(action) {
+      const actionText = action.toLowerCase(); // Змінено з text на actionText, щоб уникнути конфлікту
 
-      if (hard.some(word => text.includes(word))) return 15;
-      if (medium.some(word => text.includes(word))) return 10;
-      if (simple.some(word => text.includes(word))) return 6;
-      return 2; // стандарт
+      // Сила
+      const strengthWords = [
+        "посунути", "підняти", "зламати", "штовхнути", "вдарити", "втримати",
+        "тягнути", "відштовхнути", "виштовхнути", "перемогти", "розбити",
+        "зрушити", "розірвати", "відкрити силою", "вибити", "протиснутися",
+        "винести", "перекинути", "відтягнути", "утримати", "підперти",
+        "піднести", "кинути", "перекинутись", "переламати", "втиснути",
+        "вхопити", "утримати", "вирвати", "стиснути"];
+      if (strengthWords.some(word => actionText.includes(word))) return { difficulty: 10, stat: "strength", bonus: stats.strength };
+
+      // Спритність
+      const dexterityWords = ["перестрибнути", "стрибнути", "залізти", "вкрасти", "сховатися", "ухилитися",
+        "прокрастися", "пробратися", "підкрастися", "зіскочити", "вислизнути",
+        "спіймати", "втекти", "перекотитися", "забратися", "вискочити", "проскочити",
+        "маневрувати", "обійти", "зістрибнути", "зісковзнути", "піднятися",
+        "втрапити", "закинути", "перекинути", "підкрадатися", "оббігти"];
+      if (dexterityWords.some(word => actionText.includes(word))) return { difficulty: 10, stat: "dexterity", bonus: stats.dexterity };
+
+      // Інтелект
+      const intelligenceWords = ["прочитати", "відкрити замок", "розгадати", "дослідити", "вивчити", "зрозуміти", 
+        "розгадати", "вгадати", "розв’язати", "запам’ятати",
+        "пригадати", "аналізувати", "вирахувати", "вираховувати", "прорахувати",
+        "пояснити", "вираховувати", "вирахував", "розпізнати", "спостерігати",
+        "розшифрувати", "перевірити", "дослідити", "виявити", "інтерпретувати",
+        "застосувати знання", "використати логіку", "вирахувати логіку", "логічно мислити"];
+      if (intelligenceWords.some(word => actionText.includes(word))) return { difficulty: 10, stat: "intelligence", bonus: stats.intelligence };
+
+      // Харизма
+      const charismaWords = ["переконати", "вмовити", "обдурити", "залякати", "підкупити", "зачарувати",
+        "вплинути", "вразити", "спокусити", "надихнути", "домовитися", "запросити",
+        "обманути", "зажартувати", "посміхнутися", "поговорити", "промовити",
+        "завести розмову", "завоювати", "налагодити контакт", "виманити",
+        "маніпулювати", "висміяти", "заспокоїти", "викликати довіру"];
+      if (charismaWords.some(word => actionText.includes(word))) return { difficulty: 10, stat: "charisma", bonus: stats.charisma };
+
+      // Додаткові перевірки складності (переміщено перед використанням)
+      const simple = ["запалити", "взяти", "узяти", "підібрати", "відкрити", "закрити", "оглянути",
+        "поглянути", "подивитися", "перевірити", "оглянути", "роздивитися", "протерти",
+        "використати", "натиснути", "посвітити", "зачинити", "вимкнути", "увімкнути",
+        "знайти", "записати", "зламати гілку", "скинути", "відтягнути", "розсунути",
+        "взяти в руки", "покласти", "випити", "з'їсти", "відкусити", "достати",
+        "прочитати", "спитати", "набрати", "обернутися", "озирнутися", "покликати",
+        "достати з кишені", "вихопити", "відсунути", "торкнутись", "помахати"];
+      const medium = ["перестрибнути", "перелізти", "вкрасти", "сховатися", "вдарити", "спробувати обманути",
+        "переконати", "розпитати", "переміститися тихо", "втекти", "залякати", "кинути",
+        "перекинути", "залізти вгору", "вивести з рівноваги", "вдарити предметом", "підштовхнути",
+        "підсунути", "витягнути", "обійти пастку", "ухилитися", "підкрастися", "розгледіти",
+        "відшукати", "перетягнути", "націлитися", "кинути ніж", "спіймати", "вибити",
+        "швидко зреагувати", "спробувати вмовити", "провести ритуал", "штовхнути двері"];
+      const hard = ["переконати", "знищити", "вивести з рівноваги", "обдурити", "протиснутися силою",
+        "перемогти великого ворога", "зламати заклинання", "розгадати древню головоломку",
+        "переконати короля", "вдарити критично", "знешкодити вибухівку", "викрасти з-під носа",
+        "перекинути важкий об’єкт", "обманути натовп", "пройти невидимий лабіринт",
+        "використати заборонене закляття", "обдурити духа", "вирватися з кайданів",
+        "перемогти монстра самостійно", "вплинути на розум іншого", "воскресити", "стати невидимим",
+        "зламати магічний захист", "вивести з трансу", "зупинити ритуал", "обернути ворогів проти себе"];
+
+      if (hard.some(word => actionText.includes(word))) return { difficulty: 15, stat: "none", bonus: 0 };
+      if (medium.some(word => actionText.includes(word))) return { difficulty: 10, stat: "none", bonus: 0 };
+      if (simple.some(word => actionText.includes(word))) return { difficulty: 6, stat: "none", bonus: 0 };
+      // Стандартна дія
+      return { difficulty: 2, stat: "none", bonus: 0 };
     }
-
     async function sendAction() {
       const action = document.getElementById("action").value;
       if (!action.trim()) return;
 
+      const { difficulty, stat, bonus } = estimateDifficultyAndStat(action);
       const dice = Math.floor(Math.random() * 20) + 1;
-      const difficulty = estimateDifficulty(action);
+      const total = dice + bonus; // Додано total
 
-      log(`\n> Ти пробуєш: ${action}\nКидок d20: ${dice} (складність: ${difficulty})`);
+      log(`\n> Ти пробуєш: ${action}\nКидок d20: ${dice} + бонус (${stat !== "none" ? stat : "немає"}: ${bonus}) = ${total} (складність: ${difficulty})`);
 
       try {
         const response = await fetch("/gpt", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action, dice_result: dice, difficulty, character })
+          body: JSON.stringify({ action, dice_result: total, difficulty, character }) // Змінено dice на total
         });
 
         const data = await response.json();
