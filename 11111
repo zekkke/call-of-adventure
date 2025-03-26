@@ -1,0 +1,60 @@
+<!-- Оновлений фрагмент у start.html -->
+<div class="character-grid">
+  <div class="character" onclick="selectCharacter('воїн', { strength: 4, dexterity: 1, intelligence: 0, charisma: 2 })">
+    <img src="/static/img/warrior.png" alt="Воїн">
+    <div class="char-name">Воїн</div>
+  </div>
+
+  <div class="character" onclick="selectCharacter('асасін', { strength: 1, dexterity: 4, intelligence: 2, charisma: 0 })">
+    <img src="/static/img/assassin.png" alt="Асасін">
+    <div class="char-name">Асасін</div>
+  </div>
+
+  <div class="character" onclick="selectCharacter('вампір', { strength: 2, dexterity: 3, intelligence: 1, charisma: 3 })">
+    <img src="/static/img/vampir.png" alt="вампір">
+    <div class="char-name">Вампір</div>
+  </div>
+
+  <div class="character" onclick="selectCharacter('дварф', { strength: 3, dexterity: 0, intelligence: 2, charisma: 2 })">
+    <img src="/static/img/dwarf.png" alt="дварф">
+    <div class="char-name">Дварф</div>
+  </div>
+
+  <div class="character" onclick="selectCharacter('ельф', { strength: 0, dexterity: 3, intelligence: 2, charisma: 3 })">
+    <img src="/static/img/elf.png" alt="ельф">
+    <div class="char-name">Ельф</div>
+  </div>
+
+  <div class="character" onclick="selectCharacter('маг', { strength: 0, dexterity: 1, intelligence: 4, charisma: 2 })">
+    <img src="/static/img/mage.png" alt="маг">
+    <div class="char-name">Маг</div>
+  </div>
+</div>
+
+<script>
+  async function selectCharacter(name, stats) {
+    // Зберігаємо обраного персонажа та його характеристики
+    localStorage.setItem('selectedCharacter', name);
+    localStorage.setItem('characterStats', JSON.stringify(stats));
+
+    // Запит до /start_prompt для отримання вступної пригоди
+    try {
+      const response = await fetch("/start_prompt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ character: name })
+      });
+
+      const data = await response.json();
+      if (data.error) {
+        alert("Помилка: " + data.error);
+        return;
+      }
+
+      localStorage.setItem("intro", data.intro);
+      window.location.href = "/game";
+    } catch (error) {
+      alert("Помилка під час запиту до сервера: " + error.message);
+    }
+  }
+</script>
