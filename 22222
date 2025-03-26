@@ -70,3 +70,25 @@
     logDiv.scrollTop = logDiv.scrollHeight;
   }
 </script>
+
+
+
+@app.route('/gpt', methods=['POST'])
+def gpt_response():
+    data = request.get_json()
+    action = data.get("action")
+    result = data.get("dice_result")
+    difficulty = data.get("difficulty")
+    character = data.get("character", "герой")
+
+    prompt = f"""
+Ти — {character} у фентезійному світі. Гравець намагається: "{action}".
+Кидок d20 з бонусом: {result} (складність: {difficulty}). 
+{"Дія вдалася." if result >= difficulty else "Дія провалилася."}
+
+Опиши наслідок цієї дії коротко (до 5-6 речень), у фентезійному стилі. Не описуй нову ціль — лише реакцію на дію.
+"""
+
+    model = genai.GenerativeModel("gemini-2.0-flash")
+    response = model.generate_content(prompt)
+    return jsonify({ "reply": response.text.strip() })
