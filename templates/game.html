@@ -39,43 +39,124 @@
       border-radius: 5px;
       resize: none;
     }
+    textarea:disabled {
+      background-color: #f0f0f0;
+      color: #888;
+      cursor: not-allowed;
+    }
     button {
       padding: 10px 20px;
-      background-color: #4CAF50;
+      background-color:rgb(13, 234, 21);
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
     button:hover {
-      background-color: #45a049;
+      background-color:rgb(10, 109, 15);
     }
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    .end-message button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    .end-message {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e0ffe0;
+      border: 1px solid #4CAF50;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .character-info {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+    .character-info h3 {
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+    .character-info p {
+      margin: 5px 0;
+    }  
   </style>
 </head>
 <body>
-  <h2 id="hero"></h2>
-  <p><strong>Твоя ціль:</strong> <span id="intro"></span></p>
+  <div class="character-info">
+    <h3 id="hero"></h3>
+    <p><strong>Твоя ціль:</strong> <span id="intro"></span></p>
+    <p><strong>Зброя:</strong> <span id="weapon"></span></p>
+    <p><strong>Інвентар:</strong> <span id="inventory"></span></p>
+  </div>
 
   <div id="log" style="white-space: pre-line; border-top: 1px solid #ccc; padding-top: 10px;"></div>
 
   <hr>
   <textarea id="action" placeholder="Що ти робиш?"></textarea>
-  <button onclick="sendAction()">Спробувати</button>
+  <button id="actionButton" onclick="sendAction()">Спробувати</button>
+  <div id="endMessage" class="end-message" style="display: none;"></div>
 
   <script>
-    // Перевірка, чи є intro і персонаж
+    // Глобальний обробник помилок
+    window.onerror = function(message, source, lineno, colno, error) {
+      console.error(`Помилка: ${message} у файлі ${source}:${lineno}:${colno}`);
+      alert("Виникла помилка. Спробуйте перезапустити гру.");
+    };
+
+    // Ініціалізація змінних
     const character = localStorage.getItem("selectedCharacter") || "герой";
     const intro = localStorage.getItem("intro");
-    const stats = JSON.parse(localStorage.getItem("characterStats")) || { strength: 0, dexterity: 0, intelligence: 0, charisma: 0 };
-
+    const stats = JSON.parse(localStorage.getItem("characterStats") || "{}") || { strength: 0, dexterity: 0, intelligence: 0, charisma: 0, weapon: "Немає зброї", inventory: [] };
+    let history = JSON.parse(localStorage.getItem("gameHistory")) || [];
+    let isAdventureCompleted = localStorage.getItem("isAdventureCompleted") === "true";
+    let inventory = JSON.parse(localStorage.getItem("inventory")) || stats.inventory || []; // Початковий інвентар із stats
 
     if (!intro || !character) {
       alert("Спочатку оберіть персонажа!");
       window.location.href = "/";
     }
+
+    // Перевірка зміни персонажа
+    const previousCharacter = localStorage.getItem("previousCharacter");
+    if (previousCharacter && previousCharacter !== character) {
+      history = [];
+      localStorage.setItem("gameHistory", JSON.stringify(history));
+      localStorage.setItem("isAdventureCompleted", "false");
+      localStorage.setItem("inventory", JSON.stringify(stats.inventory || []));
+      inventory = stats.inventory || [];
+      isAdventureCompleted = false;
+    }
+    localStorage.setItem("previousCharacter", character);
+
+    // Відображаємо інформацію про персонажа
     document.getElementById("hero").innerText = "Обраний персонаж: " + character;
     document.getElementById("intro").innerText = intro;
+    document.getElementById("weapon").innerText = stats.weapon || "Немає зброї";
+    document.getElementById("inventory").innerText = inventory.join(", ") || "Інвентар порожній";
 
+    // Відображаємо історію при завантаженні сторінки
+    history.forEach(entry => log(`${entry.action}\n${entry.reply}`));
+
+    // Якщо пригода завершена, блокуємо дії
+    if (isAdventureCompleted) {
+      endGame(localStorage.getItem("finalDescription") || "Пригода завершена!");
+    }
+
+    // Додаємо обробку клавіші Enter
+    document.getElementById("action").addEventListener("keypress", function(event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendAction();
+      }
+    });
+
+    // Функція для оцінки складності дії
     function estimateDifficultyAndStat(action) {
       const actionText = action.toLowerCase(); // Змінено з text на actionText, щоб уникнути конфлікту
 
@@ -99,7 +180,7 @@
 
       // Інтелект
       const intelligenceWords = ["прочитати", "відкрити замок", "розгадати", "дослідити", "вивчити", "зрозуміти", 
-        "розгадати", "вгадати", "розв’язати", "запам’ятати",
+        "вгадати", "розв’язати", "запам’ятати",
         "пригадати", "аналізувати", "вирахувати", "вираховувати", "прорахувати",
         "пояснити", "вираховувати", "вирахував", "розпізнати", "спостерігати",
         "розшифрувати", "перевірити", "дослідити", "виявити", "інтерпретувати",
@@ -116,7 +197,7 @@
 
       // Додаткові перевірки складності (переміщено перед використанням)
       const simple = ["запалити", "взяти", "узяти", "підібрати", "відкрити", "закрити", "оглянути",
-        "поглянути", "подивитися", "перевірити", "оглянути", "роздивитися", "протерти",
+        "поглянути", "подивитися", "перевірити", "роздивитися", "протерти",
         "використати", "натиснути", "посвітити", "зачинити", "вимкнути", "увімкнути",
         "знайти", "записати", "зламати гілку", "скинути", "відтягнути", "розсунути",
         "взяти в руки", "покласти", "випити", "з'їсти", "відкусити", "достати",
@@ -142,9 +223,15 @@
       // Стандартна дія
       return { difficulty: 2, stat: "none", bonus: 0 };
     }
+
+    // Обробка дій гравця
     async function sendAction() {
       const action = document.getElementById("action").value;
       if (!action.trim()) return;
+      if (isAdventureCompleted) {
+        log("Пригода вже завершена! Почни нову гру.");
+        return;
+      }
 
       const { difficulty, stat, bonus } = estimateDifficultyAndStat(action);
       const dice = Math.floor(Math.random() * 20) + 1;
@@ -154,10 +241,16 @@
 
       try {
         const response = await fetch("/gpt", {
+          headers: {
+            "Content-Type": "application/json"
+          },
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action, dice_result: total, difficulty, character }) // Змінено dice на total
+          body: JSON.stringify({ action, dice_result: total, difficulty, character, intro, history, weapon: stats.weapon, inventory }) // Змінено dice_result на total
         });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
 
         const data = await response.json();
         if (data.error) {
@@ -165,7 +258,31 @@
           return;
         }
 
-        log(data.reply);
+        if (typeof data.reply === "string") {
+          log(data.reply);
+        } else {
+          log("Отримано некоректну відповідь від сервера.");
+        }
+
+      // Зберігаємо дію та відповідь у історію
+        history.push({ action: `> Ти пробуєш: ${action}\nКидок d20: ${dice} + бонус (${stat !== "none" ? stat : "немає"}: ${bonus}) = ${total} (складність: ${difficulty})`, reply: data.reply });
+        localStorage.setItem("gameHistory", JSON.stringify(history));
+
+        // Оновлюємо інвентар, якщо нейронка додала нові предмети
+        if (data.newItems && data.newItems.length > 0) {
+          inventory = inventory.concat(data.newItems);
+          localStorage.setItem("inventory", JSON.stringify(inventory));
+          document.getElementById("inventory").innerText = inventory.join(", ") || "Інвентар порожній";
+          log(`\n[Нові предмети]: ${data.newItems.join(", ")} додано до інвентарю!`);
+        }
+
+        // Перевіряємо, чи досягнута мета
+        if (data.isGoalAchieved) {
+          isAdventureCompleted = true;
+          localStorage.setItem("isAdventureCompleted", "true");
+          localStorage.setItem("finalDescription", data.finalDescription); // Зберігаємо finalDescription
+          endGame(data.finalDescription);
+        }
       } catch (error) {
         log(`Помилка під час запиту до сервера: ${error.message}`);
       }
@@ -173,6 +290,42 @@
       document.getElementById("action").value = "";
     }
 
+    // Функція для завершення гри
+    function endGame(finalDescription = "") {
+      const actionButton = document.getElementById("actionButton");
+      const actionInput = document.getElementById("action");
+      const endMessageDiv = document.getElementById("endMessage");
+
+      if (!actionButton || !actionInput || !endMessageDiv) {
+        console.error("One or more elements not found: actionButton, actionInput, or endMessageDiv");
+        return;
+      }
+
+      actionButton.disabled = true;
+      actionInput.disabled = true;
+      endMessageDiv.style.display = "block";
+      endMessageDiv.innerHTML = `
+        <h3>Пригода завершена!</h3>
+        <p></p>
+        <button onclick="startNewGame()">Почати нову пригоду</button>
+      `;
+      endMessageDiv.querySelector("p").textContent = finalDescription;
+    }
+    
+    // Початок нової гри
+    function startNewGame() {
+      localStorage.removeItem("selectedCharacter");
+      localStorage.removeItem("intro");
+      localStorage.removeItem("characterStats");
+      localStorage.removeItem("gameHistory");
+      localStorage.removeItem("isAdventureCompleted");
+      localStorage.removeItem("inventory");
+      localStorage.removeItem("finalDescription");
+      localStorage.removeItem("previousCharacter");
+      window.location.href = "/";
+    }
+
+    // Функція для очищення логів    
     function log(text) {
       const logDiv = document.getElementById("log");
       logDiv.innerText += text + "\n";
