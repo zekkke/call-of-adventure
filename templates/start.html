@@ -30,6 +30,23 @@
       border-radius: 10px;
     }
 
+    #loading {
+      display: none;
+      margin-top: 10px;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #fff;
+      border-top: 3px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .character-grid {
       display: flex;
       flex-wrap: wrap;
@@ -49,9 +66,11 @@
       transition: transform 0.2s;
     }
 
-    .character:hover {
+    .character:hover, .character:focus {
       transform: scale(1.05);
       background-color: rgba(255, 255, 255, 0.2);
+      outline: 2px solid #fff;
+      outline-offset: 2px;
     }
 
     .character img {
@@ -64,6 +83,13 @@
       font-size: 18px;
       font-weight: bold;
     }
+
+    .char-stats {
+      font-size: 14px;
+      color: #ddd;
+      margin-top: 5px;
+    }
+
   </style>
 </head>
 <body>
@@ -74,46 +100,67 @@
   <div class="intro">
     <h2>Обери свого персонажа</h2>
     <p>Кожен має свої унікальні характеристики, що впливатимуть на результат пригоди.</p>
+    <div id="loading"></div>
   </div>
 
   <div class="character-grid">
-    <div class="character" onclick="selectCharacter('воїн', { strength: 4, dexterity: 1, intelligence: 0, charisma: 3 })">
+    <div class="character" onclick="selectCharacter('воїн', { strength: 4, dexterity: 1, intelligence: 0, charisma: 3, weapon: 'Дворучний меч', inventory: ['Щит', 'Факел', 'Мотузка'] })">
       <img src="/static/img/warrior.png" alt="Воїн">
       <div class="char-name">Воїн</div>
+      <div class="char-stats">Сила: 4, Спритність: 1, Інтелект: 0, Харизма: 3</div>
     </div>
   
-    <div class="character" onclick="selectCharacter('асасін', { strength: 1, dexterity: 4, intelligence: 3, charisma: 0 })">
-      <img src="/static/img/assassin.png" alt="Асасін">
-      <div class="char-name">Асасін</div>
+    <div class="character" onclick="selectCharacter('ассасін', { strength: 1, dexterity: 4, intelligence: 3, charisma: 0, weapon: ['Два кинджали', 'Прихований клинок на запясті', 'Отруйні дротики', 'Метальні клинки'], inventory: ['Отрута', 'Гак', 'Факел', 'Мотузка'] })">
+      <img src="/static/img/assassin.png" alt="Ассасін">
+      <div class="char-name">Ассасін</div>
+      <div class="char-stats">Сила: 1, Спритність: 4, Інтелект: 3, Харизма: 0</div>
     </div>
   
-    <div class="character" onclick="selectCharacter('вампір', { strength: 1, dexterity: 1, intelligence: 2, charisma: 4 })">
+    <div class="character" onclick="selectCharacter('вампір', { strength: 1, dexterity: 1, intelligence: 2, charisma: 4, weapon: ['Кігті', 'Клики'], inventory: ['Еліксир крові', 'Амулет ночі для гіпнозу'] })">
       <img src="/static/img/vampir.png" alt="вампір">
       <div class="char-name">Вампір</div>
+      <div class="char-stats">Сила: 1, Спритність: 1, Інтелект: 2, Харизма: 4</div>
     </div>
   
-    <div class="character" onclick="selectCharacter('дварф', { strength: 4, dexterity: 0, intelligence: 1, charisma: 3 })">
+    <div class="character" onclick="selectCharacter('дварф', { strength: 4, dexterity: 0, intelligence: 1, charisma: 3, weapon: ['Бойова сокира', 'Скімітар'], inventory: ['Пляшка Елю', 'Факел', 'Міцна мотузка'] })">
       <img src="/static/img/dwarf.png" alt="дварф">
       <div class="char-name">Дварф</div>
+      <div class="char-stats">Сила: 4, Спритність: 0, Інтелект: 1, Харизма: 3</div>
     </div>
   
-    <div class="character" onclick="selectCharacter('ельф', { strength: 0, dexterity: 2, intelligence: 2, charisma: 4 })">
+    <div class="character" onclick="selectCharacter('ельф', { strength: 0, dexterity: 2, intelligence: 2, charisma: 4, weapon: ['Лук і стріли', 'Короткий меч'], inventory: ['Мотузка', 'Цілющі трави', 'Факел', 'Магічний кристал для звязку з природою'] })">
       <img src="/static/img/elf.png" alt="ельф">
+      <div class="char-stats">Сила: 0, Спритність: 2, Інтелект: 2, Харизма: 4</div>
       <div class="char-name">Ельф</div>
     </div>
   
-    <div class="character" onclick="selectCharacter('маг', { strength: 0, dexterity: 1, intelligence: 4, charisma: 3 })">
+    <div class="character" onclick="selectCharacter('маг', { strength: 0, dexterity: 1, intelligence: 4, charisma: 3, weapon: 'Магічний посох', inventory: ['Книга заклинань', 'Магічний порошок', 'Сфера світла'] })">
       <img src="/static/img/mage.png" alt="маг">
       <div class="char-name">Маг</div>
+      <div class="char-stats">Сила: 0, Спритність: 1, Інтелект: 4, Харизма: 3</div>
     </div>
   </div>
 
   <script>
-    async function selectCharacter(name, stats) {
-      // Зберігаємо обраного персонажа та його характеристики
-      localStorage.setItem('selectedCharacter', name);
-      localStorage.setItem('characterStats', JSON.stringify(stats));
+    // Глобальний обробник помилок
+    window.onerror = function(message, source, lineno, colno, error) {
+      console.error(`Помилка: ${message} у файлі ${source}:${lineno}:${colno}`);
+      alert("Виникла помилка. Спробуйте перезапустити гру.");
+    };
 
+    async function selectCharacter(name, stats) {
+      const loading = document.getElementById("loading");
+      loading.style.display = "block"; // Показуємо повідомлення про завантаження
+
+      // Очищаємо localStorage перед початком нової гри
+      localStorage.clear(); // Очищаємо всі дані
+      // Зберігаємо обраного персонажа та його характеристики
+      localStorage.setItem('selectedCharacter', name); 
+      localStorage.setItem('characterStats', JSON.stringify(stats)); 
+      localStorage.setItem('characterName', name); // Зберігаємо ім'я персонажа
+      localStorage.setItem('characterInventory', JSON.stringify(stats.inventory)); // Зберігаємо інвентар персонажа
+      localStorage.setItem('characterWeapon', stats.weapon); // Зберігаємо зброю персонажа
+      
       // Запит до /start_prompt для отримання вступної пригоди
       try {
         const response = await fetch("/start_prompt", {
@@ -122,10 +169,18 @@
           body: JSON.stringify({ character: name })
         });
 
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
         const data = await response.json();
         if (data.error) {
           alert("Помилка: " + data.error);
           return;
+        }
+
+        if (typeof data.intro !== "string") {
+          throw new Error("Отримано некоректний вступ від сервера.");
         }
 
         // Зберігаємо вступну пригоду в localStorage
@@ -135,6 +190,8 @@
         window.location.href = "/game";
       } catch (error) {
         alert("Помилка під час запиту до сервера: " + error.message);
+      } finally {
+        loading.style.display = "none"; // Приховуємо повідомлення про завантаження
       }
     }
   </script>
