@@ -180,16 +180,15 @@
         }
 
         if (typeof data.intro !== "string") {
-          throw new Error("Отримано некоректний вступ від сервера.");
+          throw new Error("Отримано некоректний вступ або ціль від сервера."); 
         }
-
-        // Зберігаємо вступну пригоду в localStorage
-        localStorage.setItem("intro", data.intro);
+        localStorage.setItem("intro", data.intro); // Зберігаємо вступ
+        localStorage.setItem("goal", data.goal); // Зберігаємо ціль гри
 
         // Перенаправляємо на сторінку гри
-        window.location.href = "/game";
+        window.location.href = "/game"; 
       } catch (error) {
-        alert("Помилка під час запиту до сервера: " + error.message);
+        alert("Помилка під час запиту до сервера: " + error.message); 
       } finally {
         loading.style.display = "none"; // Приховуємо повідомлення про завантаження
       }
