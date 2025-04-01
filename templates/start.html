@@ -142,7 +142,7 @@
   </div>
 
   <script>
-    // Глобальний обробник помилок
+    
     window.onerror = function(message, source, lineno, colno, error) {
       console.error(`Помилка: ${message} у файлі ${source}:${lineno}:${colno}`);
       alert("Виникла помилка. Спробуйте перезапустити гру.");
@@ -150,18 +150,16 @@
 
     async function selectCharacter(name, stats) {
       const loading = document.getElementById("loading");
-      loading.style.display = "block"; // Показуємо повідомлення про завантаження
+      loading.style.display = "block"; 
 
-      // Очищаємо localStorage перед початком нової гри
-      localStorage.clear(); // Очищаємо всі дані
-      // Зберігаємо обраного персонажа та його характеристики
+      localStorage.clear(); 
+      
       localStorage.setItem('selectedCharacter', name); 
       localStorage.setItem('characterStats', JSON.stringify(stats)); 
-      localStorage.setItem('characterName', name); // Зберігаємо ім'я персонажа
-      localStorage.setItem('characterInventory', JSON.stringify(stats.inventory)); // Зберігаємо інвентар персонажа
-      localStorage.setItem('characterWeapon', stats.weapon); // Зберігаємо зброю персонажа
+      localStorage.setItem('characterName', name); 
+      localStorage.setItem('characterInventory', JSON.stringify(stats.inventory)); 
+      localStorage.setItem('characterWeapon', stats.weapon); 
       
-      // Запит до /start_prompt для отримання вступної пригоди
       try {
         const response = await fetch("/start_prompt", {
           method: "POST",
@@ -182,15 +180,15 @@
         if (typeof data.intro !== "string") {
           throw new Error("Отримано некоректний вступ або ціль від сервера."); 
         }
-        localStorage.setItem("intro", data.intro); // Зберігаємо вступ
-        localStorage.setItem("goal", data.goal); // Зберігаємо ціль гри
+        localStorage.setItem("intro", data.intro); 
+        localStorage.setItem("goal", data.goal); 
 
-        // Перенаправляємо на сторінку гри
+       
         window.location.href = "/game"; 
       } catch (error) {
         alert("Помилка під час запиту до сервера: " + error.message); 
       } finally {
-        loading.style.display = "none"; // Приховуємо повідомлення про завантаження
+        loading.style.display = "none"; 
       }
     }
   </script>
