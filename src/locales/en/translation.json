@@ -1,0 +1,804 @@
+{
+  "welcome_screen": {
+    "title": "Welcome to Call of Adventure!"
+  },
+  "start": {
+    "select_language": "Select language:",
+    "logo_alt": "Call of Adventure Logo"
+  },
+  "languages": {
+    "ukrainian": "Ukrainian",
+    "english": "English",
+    "russian": "Russian"
+  },
+  "buttons": {
+    "start_game": "Start Game",
+    "main_menu": "Main Menu",
+    "try_action": "Try",
+    "logout": "Logout",
+    "login": "Login",
+    "new_game": "New Game",
+    "continue_game": "Continue",
+    "rules": "Rules",
+    "new_adventure": "Start a New Adventure",
+    "back": "Back",
+    "choose_race": "Choose Race",
+    "main_menu_icon_title": "Return to Main Menu"
+  },
+  "character": {
+    "unknown_hero": "Unknown Hero",
+    "unknown_race": "Unknown Race",
+    "unknown_class": "Unknown Class",
+    "default_weapon": "Fists",
+    "no_abilities": "No abilities",
+    "race": "Race: {{race}}",
+    "class": "Class: {{class}}",
+    "hp": "Health",
+    "health": "Health: {{hp}}",
+    "armor": "Armor: {{ac}}",
+    "stats": "Stats: Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "abilities": "Abilities: {{abilities}}",
+    "weapon": "Weapon: {{weapon}}",
+    "damage": "Damage: {{damage}}",
+    "attack_bonus": "Attack Bonus: {{attackBonus}}",
+    "inventory": "Inventory: {{inventory}}",
+    "inventory_empty": "Inventory is empty"
+  },
+  "game": {
+    "unknown_path": "Unknown Path",
+    "unknown_goal": "Unknown Goal",
+    "title": "Call of Adventure",
+    "goal": "Your adventure goal: {{goal}}",
+    "action_placeholder": "What do you do?",
+    "adventure_completed": "Adventure completed!",
+    "choose_character": "Please choose a character first!",
+    "action_attempt": "> You attempt: {{action}}\nRoll d20: {{dice}} + bonus ({{stat}}: {{bonus}}) = {{total}} (difficulty: {{difficulty}})",
+    "no_stat": "none",
+    "hp_restored": "Your HP is restored by {{hp}}: now {{totalHP}}",
+    "defeat_message": "You have been defeated! Game over.",
+    "victory_message": "You defeated {{npcName}}! Your adventure continues.",
+    "what_will_you_do": "What will you do?",
+    "new_items": "[New items]: {{items}} added to inventory!",
+    "item_removed": "[Item removed]: {{item}} removed from inventory.",
+    "final_message": "You have completed your quest by defeating {{npcName}}!"
+  },
+  "keywords": {
+    "give_item": [
+      "give", "I give", "to give", "I will give", "I am giving", "you give", "he/she gives", "we give", "you all give", "they give",
+      "hand over", "I hand over", "to hand over", "I will hand over", "I am handing over", "you are handing over", "he/she is handing over", "we are handing over", "you all are handing over", "they are handing over",
+      "gift", "I gift", "you gift", "he/she gifts", "we gift", "you all gift", "they gift", "to gift", "I will be gifting",
+      "donate", "I donate", "you donate", "he/she donates", "we donate", "you all donate", "they donate", "to donate", "to be donated",
+      "present", "I present", "you present", "he/she presents", "we present", "you all present", "they present", "to present",
+      "provide", "I provide", "you provide", "he/she provides", "we provide", "you all provide", "they provide", "to provide",
+      "offer", "I offer", "you offer", "he/she offers", "we offer", "you all offer", "they offer", "to offer",
+      "hand over by hand", "give by hand", "present by hand", "gift by hand",
+      "gift as a present", "donate as a gift",
+      "gift to someone", "hand over to someone", "give to someone", "present to someone", "donate to someone"
+    ],
+    "use_item": [
+      "use", "I use", "I am using", "to use", "I will use", "I will be using", "I used",
+      "utilize", "I utilize", "I am utilizing", "to utilize", "I will utilize", "I utilized",
+      "apply", "I apply", "I am applying", "to apply", "I will apply", "I applied",
+      "activate", "I activate", "I am activating", "to activate", "I will activate", "I activated",
+      "consume", "I consume", "I am consuming", "to consume", "I will consume", "I consumed",
+      "eat", "I eat", "I am eating", "to eat", "I will eat",
+      "drink", "I drink", "I am drinking", "I drank", "to drink", "I will drink",
+      "wear", "I wear", "I am wearing", "to wear", "I will wear", "I wore",
+      "put on", "I put on", "I am putting on", "to put on", "I will put on", "I put on",
+      "light", "I light", "I am lighting", "to light", "I will light",
+      "turn on", "I turn on", "I am turning on", "to turn on", "I turned on",
+      "press", "I press", "I am pressing", "to press", "I will press",
+      "engage", "I engage", "I am engaging", "to engage", "I will engage",
+      "initiate", "I initiate", "I am initiating", "to initiate", "I will initiate",
+      "apply (use)", "I apply (use)", "I am applying (using)", "to apply (use)", "I will apply (use)",
+      "start", "I start", "I am starting", "to start", "I will start"
+    ]
+  },
+  "npc.default_message": "What are you doing here, traveler?",
+  "npc.attack_message": "I attack you, {{heroname}}!",
+  "inventory.insufficient_quantity": "Insufficient quantity of items in the inventory!",
+  "combat": {
+    "unknown_enemy": "Unknown Enemy",
+    "unknown_npc": "Unknown NPC",
+    "encounter": "You encounter {{npcName}}! Health: {{hp}}, Armor: {{ac}}.",
+    "npc_stats": "{{name}} has {{hp}} health and {{ac}} armor.",
+    "attack_success": "You attack {{npcName}} with {{weapon}}! Roll: {{roll}} (success). Damage: {{damage}}{{description}}.",
+    "attack_miss": "You attack {{npcName}} with {{weapon}}! Roll: {{roll}} (miss).",
+    "sneak_attack_bonus": " (with sneak bonus)",
+    "poison_bonus": " (with poison bonus)",
+    "powerful_spell_bonus": " (with powerful spell bonus)",
+    "npc_attack_success": "{{npcName}} attacks you back! Roll: {{roll}} (success). Damage: {{damage}}. Your health: {{hp}}.",
+    "npc_attack_miss": "{{npcName}} attacks you back! Roll: {{roll}} (miss).",
+    "victory": "You defeated {{npcName}}!",
+    "default_dialogue": "{{npcName}}: State your business, stranger!",
+    "default_response": "{{npcName}}: State your business, stranger!",
+    "dragon_keyword": "dragon",
+    "wolf_keyword": "wolf",
+    "sneak_attack_keywords": {
+      "from_behind": "from behind",
+      "stealthily": "stealthily",
+      "sneak": "sneak"
+    },
+    "poison_keywords": {
+      "poison": "poison",
+      "poison_verb": "poison",
+      "apply_poison": "apply poison"
+    },
+    "spell_keywords": {
+      "strong_spell": "strong spell",
+      "powerful_spell": "powerful spell"
+    }
+  },
+  "errors": {
+    "no_enemy": "No enemy to fight! Find or summon an NPC first.",
+    "adventure_already_completed": "Adventure already completed! Start a new game.",
+    "server_error": "Error: {{error}}",
+    "server_request_error": "Error during server request: {{error}}",
+    "logout_error": "Logout error: {{error}}",
+    "global_error": "An error occurred. Please try restarting the game.",
+    "empty_name": "Please enter the character's name!",
+    "invalid_name": "The name must contain only letters, spaces, and be between 2 and 50 characters!",
+    "no_hero_name": "Character name not selected! Please return to choose a name.",
+    "no_hero_race_stats": "Name, race, or stats not selected! Please return to previous steps.",
+    "invalid_intro": "Received invalid intro or goal from the server."
+  },
+  "location_words": [
+    "room", "bedroom", "nursery", "living room", "kitchen", "dining room", "basement", "cellar", "attic", "corridor", "living room", "study", "library",
+    "dressing room", "wardrobe", "workshop", "forge", "armory", "treasury", "throne room", "hall", "ballroom", "wine cellar",
+    "laboratory", "terrace", "balcony", "veranda", "pantry", "laundry room", "bathroom", "bath", "toilet", "cell", "dungeon",
+    "storeroom", "server room", "command center", "guest room", "secret room", "heart of the temple", "observatory",
+    "house", "cottage", "hut", "manor", "castle", "fortress", "outpost", "tower", "turret", "school", "university", "office", "hospital", "pharmacy",
+    "bar", "pub", "inn", "tavern", "restaurant", "cafe", "hotel", "motel", "hostel", "shop", "store", "trading house",
+    "market", "fair", "warehouse", "bank", "post office", "post office", "salon", "operating room", "laboratory", "factory", "plant", "garage", "repair shop",
+    "temple", "chapel", "church", "cathedral", "monastery", "shrine", "crypt", "tomb", "graveyard", "altar", "sacred grove",
+    "street", "alley", "square", "avenue", "boulevard", "highway", "road", "bridge", "tunnel", "subway", "intersection", "platform", "stop", "station",
+    "path", "grass", "garden", "park", "square", "vegetable garden", "cemetery", "arena", "stadium", "amphitheater", "fair",
+    "forest", "dense forest", "grove", "clearing", "meadow", "field", "plain", "swamp", "marsh", "lake", "pond", "river", "stream", "waterfall",
+    "spring", "swamp", "cliff", "precipice", "cave", "grotto", "mountain range", "mountain", "slope", "valley", "gorge", "canyon", "desert", "dune", "oasis",
+    "seashore", "beach", "island", "cape", "port", "harbor", "bay", "lagoon", "reef", "rocky shore",
+    "vineyard", "plantation", "farm", "pasture", "estate", "well", "water pump",
+    "city", "town", "village", "hamlet", "fortress", "harbor", "port", "pier", "dock", "factory",
+    "portal", "magic circle", "lair", "catacombs", "labyrinth", "ruins", "dimension", "astral plane", "dungeon", "hangar", "space station", "platform", "portal",
+    "devil's labyrinth", "abyss", "jungle", "clearing", "secret cave", "magic forest", "fiery valley", "icy desert", "crystal cave", "forbidden room",
+    "rusty forge", "solitary cell", "treasury", "underground temple", "buried well", "arsenal", "observatory", "server room", "alchemist's laboratory",
+    "garage", "car wash", "playground", "gym", "pool", "cafe", "barbershop", "supermarket", "mall", "ATM", "restaurant",
+    "cinema", "theater hall", "museum", "gallery", "pharmacy", "beauty salon"
+  ],
+  "move_words": [
+    "go", "went", "will go", "walk", "walked", "came", "step away", "stepped away", "was stepping away", "approach",
+    "approached", "will go", "come", "was coming", "approach", "approached", "turn back", "turned back", "retreat", "retreated", "will retreat",
+    "move", "was moving", "will move", "we move", "we were moving", "we will move",
+    "descend", "descend", "descended", "enter", "entered", "we enter", "exit", "exited", "we exit",
+    "climb out", "climbed out", "advance", "advanced", "we advance", "cross", "crossed", "cross over", "crossed over",
+    "move", "moved", "move", "moved", "crawl", "crawled", "bypass", "bypassed", "will bypass",
+    "we go", "we went", "we came", "we turn back", "we turned back", "we step away", "we approached",
+    "we retreat", "we retreated", "we approach", "we approached", "we cross", "we cross over", "we enter", "we exited", "we exit", "we enter",
+    "limp", "stride", "shuffle", "wander", "travel", "traveled", "stroll", "amble", "trudge",
+    "march", "roam", "dash", "fly", "flew", "will fly", "jump", "jumped", "will jump", "gallop", "run", "ran", "will run", "crawled", "crawl", "will crawl",
+    "slog", "roam", "drag", "swim", "will swim", "swam", "glide", "slipped", "wander", "travel", "wandered", "will travel", "roam", "roamed", "will roam",
+    "set out", "set out", "will set out", "we set out", "we set out", "migrate", "drift", "flow", "head", "we head", "stroll", "jump", "fly", "run", "rush out",
+    "teleport", "teleported", "transfer", "transferred", "port", "migrate", "disappear",
+    "disappeared", "appear", "appeared", "materialize", "materialized", "dematerialize", "dematerialized", "mystically transfer", "radiate",
+    "march", "we march", "we retreat", "we storm", "storm", "we capture", "stormed", "we ambush", "we advance", "we deploy", "we cross",
+    "ride", "rode", "will ride", "we ride", "gallop", "galloped", "will gallop", "soar", "we soar", "fly", "flew", "will fly", "we fly", "swim", "swam", "will swim", "we swim",
+    "scurry", "hurry", "rush", "move at a gallop", "tread", "limp", "scrape", "shuffle", "roll", "spin", "ramble", "jingle"
+  ],
+  "attack_words": [
+    "attack", "I attack", "I am attacking", "I attacked", "I will attack",
+    "assault", "I assault", "I am assaulting", "I will assault", "I assaulted",
+    "hit", "to hit", "I hit", "I am hitting", "I hit", "I will hit",
+    "slash", "I slash", "I am slashing", "I slashed", "I will slash", "cut down", "I cut down", "I am cutting down", "I cut down", "I will cut down",
+    "stab", "I stab", "I am stabbing", "I will stab", "pierce", "I pierce", "I am piercing", "I pierced", "I will pierce",
+    "shoot", "I shoot", "I am shooting", "I shot", "I will shoot", "fire", "I fire", "I am firing", "I fired", "I will fire",
+    "shoot down", "I shoot down", "I am shooting down", "I shot down", "I will shoot down",
+    "enchant", "to enchant", "I enchant", "I am enchanting", "I enchanted", "I will enchant",
+    "cast a spell", "I cast a spell", "I am casting a spell", "I cast a spell", "I will cast a spell",
+    "charge", "I charge", "I am charging", "I charged", "I will charge",
+    "beat", "I beat", "I am beating", "I beat", "I will beat",
+    "swing", "I swing", "I am swinging", "I swung", "I will swing",
+    "aim", "I aim", "I am aiming", "I aimed", "I will aim",
+    "charge at", "I charge at", "I am charging at", "I charged at", "I will charge at",
+    "push", "to push", "I push", "I am pushing", "I pushed", "I will push",
+    "break through", "I break through", "I am breaking through", "I broke through", "I will break through", "critically hit", "I critically hit", "I critically hit",
+    "shatter", "I shatter", "I am shattering", "I shattered", "I will shatter",
+    "destroy", "I destroy", "I am destroying", "I destroyed", "I will destroy",
+    "slaughter", "I slaughter", "I am slaughtering", "I slaughtered", "I will slaughter",
+    "hack", "I hack", "I am hacking", "I hacked", "I will hack",
+    "target", "I target", "I am targeting", "I targeted", "I will target",
+    "wound", "I wound", "I am wounding", "I wounded", "I will wound",
+    "crush", "I crush", "I am crushing", "I crushed", "I will crush",
+    "strike", "I strike", "I am striking", "I struck", "I will strike",
+    "slash", "I slash", "I am slashing", "I slashed", "I will slash",
+    "slice", "I slice", "I am slicing", "I sliced", "I will slice",
+    "shoot through", "I shoot through", "I am shooting through", "I shot through", "I will shoot through",
+    "burn with a spell", "freeze with a spell", "incinerate", "freeze",
+    "hit with a sword", "hit with an axe", "cleave", "bash with a shield"
+  ],
+  "dialog_words": [
+    "talk to", "I talk to", "I am talking to", "I will talk to", "I talked to", "I will be talking to",
+    "ask", "I ask", "I am asking", "I asked", "I will ask",
+    "interrogate", "I interrogate", "I am interrogating", "I interrogated", "I will interrogate",
+    "dialog with", "have a dialog with", "I have a dialog with", "I had a dialog with", "I will have a dialog with",
+    "converse with", "I converse with", "I am conversing with", "I conversed with", "I will converse with",
+    "convince", "I convince", "I am convincing", "I convinced", "I will convince",
+    "persuade", "I persuade", "I am persuading", "I persuaded", "I will persuade",
+    "deceive", "I deceive", "I am deceiving", "I deceived", "I will deceive",
+    "intimidate", "I intimidate", "I am intimidating", "I intimidated", "I will intimidate",
+    "bribe", "I bribe", "I am bribing", "I bribed", "I will bribe",
+    "charm", "I charm", "I am charming", "I charmed", "I will charm",
+    "influence", "I influence", "I am influencing", "I influenced", "I will influence",
+    "impress", "I impress", "I am impressing", "I impressed", "I will impress",
+    "seduce", "I seduce", "I am seducing", "I seduced", "I will seduce",
+    "inspire", "I inspire", "I am inspiring", "I inspired", "I will inspire",
+    "negotiate", "I negotiate", "I am negotiating", "I negotiated", "I will negotiate",
+    "invite", "I invite", "I am inviting", "I invited", "I will invite",
+    "trick", "I trick", "I am tricking", "I tricked", "I will trick",
+    "joke", "I joke", "I am joking", "I joked", "I will joke",
+    "smile", "I smile", "I am smiling", "I smiled", "I will smile",
+    "speak", "I speak", "I am speaking", "I spoke", "I will speak",
+    "win over", "I win over", "I am winning over", "I won over", "I will win over",
+    "build rapport", "I build rapport", "I am building rapport", "I built rapport", "I will build rapport",
+    "coax", "I coax", "I am coaxing", "I coaxed", "I will coax",
+    "manipulate", "I manipulate", "I am manipulating", "I manipulated", "I will manipulate",
+    "mock", "I mock", "I am mocking", "I mocked", "I will mock",
+    "calm", "I calm", "I am calming", "I calmed", "I will calm",
+    "gain trust", "I gain trust", "I am gaining trust", "I gained trust", "I will gain trust",
+    "hello", "I greet", "good day", "good morning", "good evening",
+    "hello (formal)", "hello", "hi", "hey", "I greet", "I greeted", "I am greeting",
+    "good day", "good evening", "good morning", "peace to you", "be well",
+    "how are you", "how are you", "what's new", "what happened", "what are you doing", "what's up",
+    "I greet you (formal)", "I greet you", "glad to meet you", "glad to see you", "glad to see you",
+    "excuse me", "I apologize", "excuse me (formal)", "forgive me",
+    "allow me to ask", "allow me to inquire", "can you tell", "can you share",
+    "can you explain", "can you suggest", "can you help", "can you give advice",
+    "can you suggest", "can you tell about", "can you tell me about",
+    "may I talk to", "would you like to talk to", "we can talk", "let's talk",
+    "tell", "inform", "say", "share", "communicate",
+    "allow me to ask", "allow me to inquire"
+  ],
+  "strength_words": [
+    "push", "lift", "break", "shove", "hit", "hold",
+    "pull", "push away", "force out", "overpower", "smash",
+    "move", "tear", "force open", "kick", "squeeze through",
+    "carry", "throw", "flip", "hold steady", "support",
+    "raise", "toss", "flip over", "snap", "press",
+    "grab", "restrain", "rip", "crush",
+    "I push", "I pushed", "I lift", "I lifted", "I break", "I am breaking",
+    "I shove", "I shoved", "I hit", "I am hitting", "I hold", "I pull", "I pulled",
+    "I push away", "I pushed away", "I force out", "I forced out", "I overpower", "I overpowered",
+    "I smash", "I smashed", "I move", "I moved", "I tear", "I tore",
+    "I force open", "I forced open", "I kick", "I kicked", "I squeeze through", "I squeezed through",
+    "I carry", "I carried", "I throw", "I threw", "I flip", "I flipped",
+    "I pull back", "I pulled back", "I hold steady", "I held steady", "I support", "I supported",
+    "I raise", "I raised", "I toss", "I tossed", "I flip over", "I flipped over",
+    "I snap", "I snapped", "I press", "I pressed", "I grab", "I grabbed",
+    "I restrain", "I restrained", "I rip", "I ripped", "I crush", "I crushed",
+    "I am pushing", "I am lifting", "I am breaking", "I am shoving", "I am hitting", "I am holding",
+    "I am pulling", "I am pushing away", "I am forcing out", "I am overpowering", "I am smashing",
+    "I am moving", "I am tearing", "I am forcing open", "I am kicking", "I am squeezing through",
+    "I am carrying", "I am throwing", "I am flipping", "I am holding steady", "I am supporting",
+    "I am raising", "I am tossing", "I am flipping over", "I am snapping", "I am pressing",
+    "I am grabbing", "I am ripping", "I am crushing", "I am supporting", "I am pushing apart",
+    "I am pressing down", "I am dragging", "I am splitting", "I am pressing", "I am pulling out",
+    "I am carrying away", "I am picking up", "I am breaking apart", "I am crushing", "I am tearing off",
+    "I am seizing", "I am supporting", "I am moving", "I am pushing aside", "I am twisting",
+    "I am pressing against", "I am turning over", "I am straightening", "I am forcing out", "I am pulling in",
+    "I am breaking", "I am crushing", "I am bending", "I am shaking", "I am unclenching",
+    "I am breaking down", "I am squeezing out", "I am straightening", "I am bending", "I am holding"
+  ],
+  "dexterity_words": [
+    "jump over", "jump", "climb", "steal", "hide", "dodge",
+    "sneak", "slip through", "sneak up", "jump down", "escape",
+    "catch", "flee", "roll", "climb up", "jump out", "slip through",
+    "maneuver", "bypass", "jump off", "slide", "ascend",
+    "hit", "throw", "flip", "sneak around", "run around",
+    "I jump over", "I jumped over", "I jump", "I jumped", "I climb", "I climbed",
+    "I steal", "I stole", "I hide", "I hid", "I dodge", "I dodged",
+    "I sneak", "I sneaked", "I slip through", "I slipped through", "I sneak up", "I sneaked up",
+    "I jump down", "I jumped down", "I escape", "I escaped", "I catch", "I caught",
+    "I flee", "I fled", "I roll", "I rolled", "I climb up", "I climbed up",
+    "I jump out", "I jumped out", "I slip through", "I slipped through", "I maneuver", "I maneuvered",
+    "I bypass", "I bypassed", "I jump off", "I jumped off", "I slide", "I slid",
+    "I ascend", "I ascended", "I hit", "I hit", "I throw", "I threw",
+    "I flip", "I flipped", "I sneak around", "I sneaked around", "I run around", "I ran around",
+    "I am jumping over", "I am jumping", "I am climbing", "I am stealing", "I am hiding", "I am dodging",
+    "I am sneaking", "I am slipping through", "I am sneaking up", "I am jumping down", "I am escaping",
+    "I caught", "I am fleeing", "I am rolling", "I am climbing up", "I am jumping out", "I am slipping through",
+    "I am maneuvering", "I am bypassing", "I am jumping off", "I am sliding", "I am ascending",
+    "I am hitting", "I am throwing", "I am flipping", "I am sneaking around", "I am running around",
+    "I am slipping through", "I am climbing over", "I am dodging", "I am leaping out", "I catch",
+    "I am jumping across", "I am evading", "I am pushing through", "I am hopping", "I am maneuvering"
+  ],
+  "intelligence_words": [
+    "read", "unlock", "solve", "investigate", "study", "understand",
+    "guess", "resolve", "memorize", "recall", "analyze", "calculate",
+    "compute", "predict", "explain", "deduce", "recognize", "observe",
+    "decipher", "check", "detect", "interpret", "apply knowledge",
+    "use logic", "deduce logic", "think logically", "read", "cast",
+    "enchant", "curse",
+    "I read", "I read (past)", "I unlock", "I unlocked",
+    "I solve", "I solved", "I investigate", "I investigated", "I study", "I studied",
+    "I understand", "I understood", "I guess", "I guessed", "I resolve", "I resolved",
+    "I memorize", "I memorized", "I recall", "I recalled", "I analyze", "I analyzed",
+    "I calculate", "I calculated", "I compute", "I computed", "I predict", "I predicted",
+    "I explain", "I explained", "I deduce", "I deduced", "I recognize", "I recognized",
+    "I observe", "I observed", "I decipher", "I deciphered", "I check", "I checked",
+    "I detect", "I detected", "I interpret", "I interpreted", "I apply knowledge", "I applied knowledge",
+    "I use logic", "I used logic", "I deduce logic", "I deduced logic",
+    "I think logically", "I thought logically", "I cast", "I cast (past)", "I enchant", "I enchanted",
+    "I curse", "I cursed",
+    "I am reading", "I am unlocking", "I am solving", "I am investigating", "I am studying", "I am understanding",
+    "I am guessing", "I am resolving", "I am memorizing", "I am recalling", "I am analyzing", "I am calculating",
+    "I am computing", "I am predicting", "I am explaining", "I am recognizing", "I am observing", "I am deciphering",
+    "I am checking", "I am detecting", "I am interpreting", "I am applying knowledge", "I am using logic",
+    "I am thinking logically", "I am casting", "I am enchanting", "I am cursing", "I am computing",
+    "I am planning", "I am foreseeing", "I am evaluating", "I am figuring out", "I am synthesizing",
+    "I am decoding", "I am organizing", "I am reasoning"
+  ],
+  "charisma_words": [
+    "persuade", "convince", "deceive", "intimidate", "bribe", "charm",
+    "influence", "impress", "seduce", "inspire", "negotiate", "invite",
+    "trick", "joke", "smile", "speak",
+    "win over", "build rapport", "coax", "manipulate", "mock",
+    "calm", "gain trust",
+    "I persuade", "I persuaded",
+    "I convince", "I convinced", "I deceive", "I deceived", "I intimidate", "I intimidated",
+    "I bribe", "I bribed", "I charm", "I charmed", "I influence", "I influenced",
+    "I impress", "I impressed", "I seduce", "I seduced", "I inspire", "I inspired",
+    "I negotiate", "I negotiated", "I invite", "I invited", "I trick", "I tricked",
+    "I joke", "I joked", "I smile", "I smiled", "I speak", "I spoke",
+    "I win over", "I won over", "I build rapport", "I built rapport", "I coax", "I coaxed",
+    "I manipulate", "I manipulated", "I mock", "I mocked", "I calm", "I calmed",
+    "I gain trust", "I gained trust",
+    "I am persuading", "I am convincing", "I am deceiving", "I am intimidating", "I am bribing", "I am charming",
+    "I am influencing", "I am impressing", "I am seducing", "I am inspiring", "I am negotiating", "I am inviting",
+    "I am tricking", "I am joking", "I am smiling", "I am speaking", "I am winning over",
+    "I am building rapport", "I am coaxing", "I am manipulating", "I am mocking", "I am calming",
+    "I am gaining trust", "I am flattering", "I am supporting", "I am captivating", "I am attracting attention",
+    "I am flattering", "I am sweet-talking", "I am entertaining", "I am encouraging", "I am intriguing"
+  ],
+  "wisdom_words": [
+    "observe", "sense", "realize", "predict", "reflect", "intuition",
+    "notice", "spot", "distinguish", "sense danger", "hear heartbeat",
+    "read intentions", "track", "know", "understand signs", "smell",
+    "notice detail", "sense change", "predict outcome",
+    "I observe", "I observed",
+    "I sense", "I sensed", "I realize", "I realized", "I predict", "I predicted",
+    "I reflect", "I reflected", "I trust my intuition", "I understood intuitively", "I notice", "I noticed",
+    "I spot", "I spotted", "I distinguish", "I distinguished", "I sense danger", "I sensed danger",
+    "I hear heartbeat", "I heard heartbeat", "I read intentions", "I read intentions", "I track", "I tracked",
+    "I know", "I knew", "I understand signs", "I understood signs", "I smell", "I smelled",
+    "I notice detail", "I noticed detail", "I sense change", "I sensed change", "I predict outcome",
+    "I predicted outcome",
+    "I am observing", "I am sensing", "I am realizing", "I am predicting", "I am reflecting", "I am trusting my intuition",
+    "I am noticing", "I am spotting", "I am distinguishing", "I am sensing danger", "I am hearing heartbeat",
+    "I am reading intentions", "I am tracking", "I am knowing", "I am understanding signs", "I am smelling",
+    "I am noticing detail", "I am sensing change", "I am predicting outcome", "I am analyzing the situation",
+    "I am listening carefully", "I am recognizing tracks", "I am sensing energy", "I am grasping the essence", "I am perceiving"
+  ],
+  "constitution_words": [
+    "endure", "tolerate", "survive", "resist", "recover", "heal",
+    "better endure", "stand firm", "hold breath", "withstand",
+    "endure pain", "endurance", "resistance", "restore strength", "keep moving",
+    "resist stress", "endure fatigue", "resist poison",
+    "I endure", "I endured",
+    "I tolerate", "I tolerated", "I survive", "I survived", "I resist", "I resisted",
+    "I recover", "I recovered", "I heal", "I healed", "I better endure", "I better endured",
+    "I stand firm", "I stood firm", "I hold breath", "I held breath", "I withstand", "I withstood",
+    "I endure pain", "I endured pain", "I show endurance", "I showed endurance", "I resist", "I resisted",
+    "I restore strength", "I restored strength", "I keep moving", "I kept moving", "I resist stress", "I resisted stress",
+    "I endure fatigue", "I endured fatigue", "I resist poison", "I resisted poison",
+    "I am enduring", "I am tolerating", "I am surviving", "I am resisting", "I am recovering", "I am healing",
+    "I am better enduring", "I am standing firm", "I am holding breath", "I am withstanding",
+    "I am enduring pain", "I am showing endurance", "I am resisting", "I am restoring strength",
+    "I am keeping moving", "I am resisting stress", "I am enduring fatigue", "I am resisting poison",
+    "I am overcoming weakness", "I am enduring", "I am conserving energy", "I am resisting illness",
+    "I am adapting to conditions", "I am staying calm", "I am controlling emotions", "I am maintaining endurance",
+    "I am preserving strength", "I am maintaining endurance", "I am preserving stamina", "I am maintaining health"
+  ],
+  "simple_actions": [
+    "light", "take", "pick up", "open", "close", "examine",
+    "look", "inspect", "check", "look around", "wipe",
+    "use", "press", "shine", "shut", "turn off", "turn on",
+    "find", "write", "break branch", "drop", "pull back", "push aside",
+    "take in hands", "place", "drink", "bite", "retrieve",
+    "read", "ask", "collect", "turn around", "look around", "call",
+    "pull from pocket", "draw", "push away", "touch", "wave",
+    "I light", "I lit",
+    "I take", "I took", "I pick up", "I picked up", "I open", "I opened",
+    "I close", "I closed", "I examine", "I examined", "I look", "I looked", "I inspect", "I inspected",
+    "I check", "I checked", "I look around", "I looked around", "I wipe", "I wiped", "I use", "I used",
+    "I press", "I pressed", "I shine", "I shone", "I shut", "I shut",
+    "I turn off", "I turned off", "I turn on", "I turned on", "I find", "I found",
+    "I write", "I wrote", "I break branch", "I broke branch", "I drop", "I dropped",
+    "I pull back", "I pulled back", "I push aside", "I pushed aside", "I take in hands", "I took in hands",
+    "I place", "I placed", "I drink", "I drank", "I bite", "I bit",
+    "I retrieve", "I retrieved", "I read", "I read (past)", "I ask", "I asked",
+    "I collect", "I collected", "I turn around", "I turned around", "I look around", "I looked around",
+    "I call", "I called", "I pull from pocket", "I pulled from pocket", "I draw", "I drew",
+    "I push away", "I pushed away", "I touch", "I touched", "I wave", "I waved",
+    "I am lighting", "I am taking", "I am picking up", "I am opening", "I am closing", "I am examining",
+    "I am looking", "I am inspecting", "I am checking", "I am looking around", "I am wiping",
+    "I am using", "I am pressing", "I am shining", "I am shutting", "I am turning off", "I am turning on",
+    "I am finding", "I am writing", "I am breaking branch", "I am dropping", "I am pulling back", "I am pushing aside",
+    "I am taking in hands", "I am placing", "I am drinking", "I am biting", "I am retrieving",
+    "I am reading", "I am asking", "I am collecting", "I am turning around", "I am looking around", "I am calling",
+    "I am pulling from pocket", "I am drawing", "I am pushing away", "I am touching", "I am waving",
+    "I am pushing", "I am listening", "I am smelling", "I am tasting", "I am unfolding"
+  ],
+  "medium_actions": [
+    "jump over", "read", "cast spell", "climb over", "steal", "hide",
+    "hit", "try to deceive", "persuade", "inquire", "move quietly",
+    "escape", "intimidate", "throw", "flip", "climb up", "unbalance",
+    "hit with object", "push", "slide", "pull out", "bypass trap",
+    "dodge", "sneak", "look closely", "search", "drag", "aim",
+    "throw knife", "catch", "kick", "react quickly", "try to convince",
+    "perform ritual", "push door",
+    "I jump over", "I jumped over", "I read", "I read (past)",
+    "I cast spell", "I cast spell (past)", "I climb over", "I climbed over", "I steal", "I stole", "I hide", "I hid",
+    "I hit", "I hit (past)", "I try to deceive", "I tried to deceive", "I persuade", "I persuaded", "I inquire", "I inquired",
+    "I move quietly", "I moved quietly", "I escape", "I escaped", "I intimidate", "I intimidated", "I throw", "I threw",
+    "I flip", "I flipped", "I climb up", "I climbed up", "I unbalance", "I unbalanced", "I hit with object", "I hit with object (past)",
+    "I push", "I pushed", "I slide", "I slid", "I pull out", "I pulled out", "I bypass trap", "I bypassed trap",
+    "I dodge", "I dodged", "I sneak", "I sneaked", "I look closely", "I looked closely", "I search", "I searched",
+    "I drag", "I dragged", "I aim", "I aimed", "I throw knife", "I threw knife", "I catch", "I caught",
+    "I kick", "I kicked", "I react quickly", "I reacted quickly", "I try to convince", "I tried to convince", "I perform ritual", "I performed ritual",
+    "I push door", "I pushed door",
+    "I am jumping over", "I am reading", "I am casting spell", "I am climbing over", "I am stealing", "I am hiding",
+    "I am hitting", "I am trying to deceive", "I am persuading", "I am inquiring", "I am moving quietly",
+    "I am escaping", "I am intimidating", "I am throwing", "I am flipping", "I am climbing up", "I am unbalancing",
+    "I am hitting with object", "I am pushing", "I am sliding", "I am pulling out", "I am bypassing trap",
+    "I am dodging", "I am sneaking", "I am looking closely", "I am searching", "I am dragging", "I am aiming",
+    "I am throwing knife", "I caught", "I am kicking", "I am reacting quickly", "I am trying to convince",
+    "I am performing ritual", "I am pushing door", "I am maneuvering", "I am revealing", "I am diverting",
+    "I am jumping across", "I am aiming carefully"
+  ],
+  "hard_actions": [
+    "persuade", "destroy", "unbalance", "deceive", "force through",
+    "defeat large enemy", "break spell", "solve ancient puzzle",
+    "persuade king", "strike critically", "disarm explosive", "steal under nose",
+    "flip heavy object", "deceive crowd", "pass invisible maze",
+    "use forbidden spell", "deceive spirit", "break free from chains",
+    "defeat monster alone", "influence mind", "resurrect", "become invisible",
+    "break magical barrier", "snap out of trance", "stop ritual", "turn enemies against each other",
+    "I persuade", "I persuaded", "I destroy", "I destroyed", "I unbalance", "I unbalanced",
+    "I deceive", "I deceived", "I force through", "I forced through", "I defeat large enemy",
+    "I defeated large enemy", "I break spell", "I broke spell", "I solve ancient puzzle",
+    "I solved ancient puzzle", "I persuade king", "I persuaded king", "I strike critically",
+    "I struck critically", "I disarm explosive", "I disarmed explosive", "I steal under nose", "I stole under nose",
+    "I flip heavy object", "I flipped heavy object", "I deceive crowd", "I deceived crowd",
+    "I pass invisible maze", "I passed invisible maze", "I use forbidden spell",
+    "I used forbidden spell", "I deceive spirit", "I deceived spirit", "I break free from chains",
+    "I broke free from chains", "I defeat monster alone", "I defeated monster alone",
+    "I influence mind", "I influenced mind", "I resurrect", "I resurrected",
+    "I become invisible", "I became invisible", "I break magical barrier", "I broke magical barrier",
+    "I snap out of trance", "I snapped out of trance", "I stop ritual", "I stopped ritual",
+    "I turn enemies against each other", "I turned enemies against each other",
+    "I am persuading", "I am destroying", "I am unbalancing", "I am deceiving", "I am forcing through",
+    "I am defeating large enemy", "I am breaking spell", "I am solving ancient puzzle",
+    "I am persuading king", "I am striking critically", "I am disarming explosive", "I am stealing under nose",
+    "I am flipping heavy object", "I am deceiving crowd", "I am passing invisible maze",
+    "I am using forbidden spell", "I am deceiving spirit", "I am breaking free from chains",
+    "I am defeating monster alone", "I am influencing mind", "I am resurrecting", "I am becoming invisible",
+    "I am breaking magical barrier", "I am snapping out of trance", "I am stopping ritual", "I am turning enemies against each other",
+    "I am dispelling magic", "I am summoning ancient power", "I am uncovering secret", "I am breaking curse",
+    "I am capturing fortress", "I am destroying artifact", "I am subduing spirit", "I am unbalancing enemy",
+    "I am destroying enemy", "I am destroying magic", "I am destroying trap", "I am destroying illusion", "I am destroying spell"
+  ],
+  "races": {
+    "human": {
+      "name": "Human",
+      "description": "A versatile and adaptable race, known for its ability to thrive in any environment. Humans learn quickly, easily adapt to new circumstances, and often display a variety of talents, from martial arts to magic. Their short lifespan drives them to act decisively and innovatively.",
+      "stats": "Strength: +1, Dexterity: +1, Constitution: +1, Intelligence: +1, Wisdom: +1, Charisma: +1"
+    },
+    "dwarf": {
+      "name": "Dwarf",
+      "description": "A hardy people of mountains and caves, dwarves are renowned for their resilience and mastery in blacksmithing and stonework. Their culture is deeply tied to traditions, and their sturdy bodies allow them to endure the harsh conditions of underground life. Dwarves value order and often become reliable allies.",
+      "stats": "Strength: +2, Constitution: +2"
+    },
+    "duergar": {
+      "name": "Duergar",
+      "description": "Dark dwarves living in the Underdark, duergar are known for their suspicion and expertise in crafting magical artifacts. Life in darkness has toughened their bodies, but their isolation from sunlight has made them less sociable. They value discipline and often employ psychic abilities.",
+      "stats": "Strength: +2, Constitution: +1, Charisma: -1"
+    },
+    "wood_elf": {
+      "name": "Wood Elf",
+      "description": "Masters of the forest and nature, these elves live in harmony with the world around them, possessing exceptional agility and perception. They are skilled archers and healers, drawing strength from trees and rivers. Their longevity allows them to accumulate deep knowledge of nature.",
+      "stats": "Dexterity: +2, Intelligence: +1, Wisdom: +1, Charisma: +1"
+    },
+    "dark_elf": {
+      "name": "Dark Elf",
+      "description": "Cunning elves from the underground world, known for their grace and magical abilities. Life in darkness has made them masters of intrigue and poison, and their beauty often conceals a dangerous nature. They worship a spider goddess and have a strong connection to magic.",
+      "stats": "Dexterity: +2, Intelligence: +1, Wisdom: +2"
+    },
+    "halfling": {
+      "name": "Halfling",
+      "description": "Small and agile, halflings love comfort and a simple life. Their small stature allows them to avoid dangers, and their friendliness makes them favorites in communities. They often become unmatched thieves or merchants.",
+      "stats": "Strength: -1, Dexterity: +2, Intelligence: +1, Wisdom: +1, Charisma: +2"
+    },
+    "gnome": {
+      "name": "Gnome",
+      "description": "Small but cunning inventors, gnomes are famous for their mechanical marvels and magical illusions. Their curious minds and wit allow them to create complex devices, while their love for jokes adds a unique charm.",
+      "stats": "Strength: +1, Constitution: +2, Intelligence: +2, Wisdom: +1"
+    },
+    "half_elf": {
+      "name": "Half-Elf",
+      "description": "A blend of human and elven blood, half-elves combine human resilience with elven grace. Their versatility allows them to pursue various paths—from warriors to sorcerers. They often serve as mediators between races.",
+      "stats": "Dexterity: +1, Constitution: +1, Intelligence: +1, Wisdom: +1, Charisma: +2"
+    },
+    "half_orc": {
+      "name": "Half-Orc",
+      "description": "Strong and resilient, but rough, half-orcs are descendants of orcs and humans. Their strength in battle is unmatched, but their social skills suffer due to stereotypes. They often strive to prove their worth.",
+      "stats": "Strength: +2, Constitution: +1, Charisma: -1"
+    },
+    "dragonborn_fire": {
+      "name": "Dragonborn (Fire)",
+      "description": "Descendants of dragons with fiery breath, these warriors burn with a passion for battle. Their scales protect them from fire, and their magical power allows them to unleash flames. They honor dragons as their ancestors.",
+      "stats": "Strength: +2, Constitution: +1, Intelligence: +1, Wisdom: +2, Charisma: +1"
+    },
+    "tiefling": {
+      "name": "Tiefling",
+      "description": "Descendants of demons with magical abilities, tieflings often face prejudice due to their demonic appearance. Their magical nature allows them to control dark forces, and their charisma attracts both friends and enemies.",
+      "stats": "Dexterity: +2, Constitution: +1, Intelligence: +1, Wisdom: +1, Charisma: +2"
+    },
+    "aasimar": {
+      "name": "Aasimar",
+      "description": "Descendants of celestial beings with a holy aura, aasimar radiate light and hope. Their strength comes from a divine calling, and their wisdom helps guide others toward goodness. They often become priests or paladins.",
+      "stats": "Dexterity: +1, Constitution: +2, Intelligence: +1, Wisdom: +2, Charisma: +2"
+    },
+    "goliath": {
+      "name": "Goliath",
+      "description": "Giant warriors from mountain peaks, goliaths live in harsh conditions where only the strongest survive. Their endurance and strength make them ideal fighters, and their love for competition shapes their lives.",
+      "stats": "Strength: +3, Constitution: +2, Intelligence: -1"
+    },
+    "tabaxi": {
+      "name": "Tabaxi",
+      "description": "Feline creatures who love adventure, tabaxi are known for their grace and curiosity about the world. Their agility allows them to avoid dangers, and their hunter instincts make them excellent trackers.",
+      "stats": "Dexterity: +3, Constitution: +1, Intelligence: +1, Wisdom: +1"
+    },
+    "firbolg": {
+      "name": "Firbolg",
+      "description": "Large forest beings living in harmony with nature, firbolgs are protectors of the woods. Their strength comes from the earth, and their wisdom stems from a spiritual connection with animals and plants.",
+      "stats": "Strength: +1, Constitution: +2, Intelligence: +1, Wisdom: +2, Charisma: +1"
+    },
+    "kenku": {
+      "name": "Kenku",
+      "description": "Bird-like creatures that mimic sounds, kenku have lost their own voices but compensate with cleverness. Their agility and cunning make them unmatched spies, though their social detachment complicates communication.",
+      "stats": "Dexterity: +2, Intelligence: +2, Wisdom: +2"
+    },
+    "lizardfolk": {
+      "name": "Lizardfolk",
+      "description": "Lizard-like creatures from the swamps, lizardfolk survive thanks to their endurance and instincts. They are masters of survival in the wild, but their cold nature makes friendships with other races difficult.",
+      "stats": "Strength: +1, Dexterity: +1, Constitution: +2, Intelligence: +2, Wisdom: +1"
+    },
+    "triton": {
+      "name": "Triton",
+      "description": "Sea creatures living in the depths, tritons wield the power of the ocean and water magic. Their charisma reflects the beauty of the sea depths, and their endurance helps them survive underwater storms.",
+      "stats": "Strength: +1, Dexterity: +1, Constitution: +2, Charisma: +1"
+    },
+    "bugbear": {
+      "name": "Bugbear",
+      "description": "Large, hairy creatures who love ambushes, bugbears are natural predators. Their strength and endurance make them dangerous in combat, but their roughness repels allies.",
+      "stats": "Strength: +3, Constitution: +2, Charisma: -1"
+    },
+    "goblin": {
+      "name": "Goblin",
+      "description": "Cunning and agile, but not very pleasant, goblins live in chaos and love to steal. Their agility allows them to avoid dangers, and their intellect helps them devise clever plans.",
+      "stats": "Dexterity: +2, Intelligence: +2, Wisdom: +1, Charisma: -1"
+    },
+    "hobgoblin": {
+      "name": "Hobgoblin",
+      "description": "Militaristic goblins with discipline, hobgoblins are masters of strategy and tactics. Their endurance and strength make them valuable soldiers, and their intellect makes them leaders.",
+      "stats": "Strength: +2, Dexterity: +2, Constitution: +1, Intelligence: +1"
+    },
+    "orc": {
+      "name": "Orc",
+      "description": "Wild and fearless warriors, orcs live for battle and glory. Their strength is legendary, but their aggression and low intellect often lead to conflicts with other races.",
+      "stats": "Strength: +3, Constitution: +2, Intelligence: -1, Charisma: -1"
+    },
+    "yuan_ti": {
+      "name": "Yuan-Ti",
+      "description": "Serpentine creatures with magical abilities, yuan-ti are masters of poisons and charms. Their grace and intellect make them dangerous foes, and their charisma hides their sinister nature.",
+      "stats": "Dexterity: +2, Intelligence: +2, Wisdom: +2, Charisma: +1"
+    },
+    "harengon": {
+      "name": "Harengon",
+      "description": "Rabbit-like creatures who love to hop, harengons combine agility with a cheerful demeanor. Their speed helps them avoid dangers, and their charisma attracts friends on their journeys.",
+      "stats": "Dexterity: +3, Intelligence: +3, Wisdom: +3, Charisma: +3"
+    },
+    "satyr": {
+      "name": "Satyr",
+      "description": "Jovial creatures who love music, satyrs embody joy and rebellion. Their charisma captivates listeners, and their agility helps them escape the consequences of their antics.",
+      "stats": "Dexterity: +2, Intelligence: +2, Wisdom: +2, Charisma: +2"
+    },
+    "minotaur": {
+      "name": "Minotaur",
+      "description": "Powerful creatures with a bull’s head, minotaurs are natural warriors. Their strength and endurance are perfect for combat, and their wisdom helps them navigate labyrinths.",
+      "stats": "Strength: +3, Constitution: +2, Intelligence: -1, Wisdom: +1"
+    },
+    "verdan": {
+      "name": "Verdan",
+      "description": "Small goblinoids that grow quickly, verdans combine agility with endurance. Their short lifespan encourages them to live vibrantly, and their charisma attracts allies.",
+      "stats": "Dexterity: +2, Constitution: +1, Intelligence: +1, Wisdom: +1, Charisma: +1"
+    },
+    "centaur": {
+      "name": "Centaur",
+      "description": "Half-human, half-horse creatures who love freedom, centaurs are masters of riding and combat. Their strength and agility make them unmatched in the steppes, and their wisdom reflects their connection to nature.",
+      "stats": "Strength: +3, Dexterity: +1, Constitution: +1, Wisdom: +2"
+    }
+  },
+  "classes": {
+    "barbarian": "Barbarian",
+    "bard": "Bard",
+    "cleric": "Cleric",
+    "druid": "Druid",
+    "fighter": "Fighter",
+    "monk": "Monk",
+    "paladin": "Paladin",
+    "ranger": "Ranger",
+    "rogue": "Rogue",
+    "warlock": "Warlock",
+    "wizard": "Wizard",
+    "witcher": "Witcher"
+  },
+  "classes_descriptions": {
+    "barbarian": "A fierce warrior who fights in a rage.",
+    "bard": "A musician who inspires allies with magic.",
+    "cleric": "A servant of the gods who heals and protects.",
+    "druid": "A nature mage who harnesses the power of the forest.",
+    "fighter": "A weapon master who excels in close combat.",
+    "monk": "A martial artist who channels the energy of the body.",
+    "paladin": "A holy warrior who fights for justice.",
+    "ranger": "A hunter who knows the ways of nature and tracking.",
+    "rogue": "A master of stealth attacks and trickery.",
+    "warlock": "A dark mage who makes pacts with demons.",
+    "wizard": "A master of magic who uses spells in battle.",
+    "witcher": "A monster hunter who uses alchemy and a sword."
+  },
+  "classes_stats": {
+    "barbarian": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "bard": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "cleric": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "druid": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "fighter": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "monk": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "paladin": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "ranger": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "rogue": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "warlock": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "wizard": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}",
+    "witcher": "Strength: {{strength}}, Dexterity: {{dexterity}}, Constitution: {{constitution}}, Intelligence: {{intelligence}}, Wisdom: {{wisdom}}, Charisma: {{charisma}}"
+  },
+  "classes_abilities": {
+    "barbarian": {
+      "rage": "Rage",
+      "unbreakable": "Unbreakable"
+    },
+    "bard": {
+      "melody": "Magical Melody",
+      "inspiration": "Inspiration"
+    },
+    "cleric": {
+      "light": "Holy Light",
+      "healing": "Healing"
+    },
+    "druid": {
+      "nature": "Nature Bond",
+      "transform": "Shapechange"
+    },
+    "fighter": {
+      "breath": "Second Wind",
+      "mastery": "Weapon Mastery"
+    },
+    "monk": {
+      "strike": "Elemental Strike",
+      "speed": "Speed"
+    },
+    "paladin": {
+      "oath": "Holy Oath",
+      "healing": "Lay on Hands"
+    },
+    "ranger": {
+      "tracking": "Tracking",
+      "friend": "Nature's Friend"
+    },
+    "rogue": {
+      "sneak": "Sneak Attack",
+      "trick": "Sleight of Hand"
+    },
+    "warlock": {
+      "curse": "Dark Curse",
+      "demons": "Demons"
+    },
+    "wizard": {
+      "fireball": "Fireball",
+      "shield": "Magic Shield"
+    },
+    "witcher": {
+      "hunter": "Monster Hunter",
+      "alchemy": "Alchemy"
+    }
+  },
+  "classes_weapons": {
+    "barbarian": "Battle Axe",
+    "bard": "Lute",
+    "cleric": "Mace",
+    "druid": "Nature Staff",
+    "fighter": "Longsword",
+    "monk": "Fighting Gauntlets",
+    "paladin": "Sword and Shield",
+    "ranger": "Bow and Arrows",
+    "rogue": "Dual Daggers",
+    "warlock": "Magic Dagger",
+    "wizard": "Magic Staff",
+    "witcher": "Silver Sword"
+  },
+  "classes_inventory": {
+    "barbarian": {
+      "potion": "Strength Potion",
+      "mead": "Tankard of Mead"
+    },
+    "bard": {
+      "notes": "Sheet Music",
+      "potion": "Charisma Potion"
+    },
+    "cleric": {
+      "water": "Holy Water",
+      "book": "Prayer Book"
+    },
+    "druid": {
+      "herbs": "Herbs",
+      "potion": "Nature Potion"
+    },
+    "fighter": {
+      "potion": "Endurance Potion",
+      "stone": "Whetstone"
+    },
+    "monk": {
+      "mat": "Meditation Mat",
+      "potion": "Dexterity Potion"
+    },
+    "paladin": {
+      "relic": "Holy Relic",
+      "potion": "Healing Potion"
+    },
+    "ranger": {
+      "trap": "Trap",
+      "potion": "Camouflage Potion"
+    },
+    "rogue": {
+      "lockpicks": "Lockpicks",
+      "smoke": "Smoke Bomb"
+    },
+    "warlock": {
+      "crystal": "Dark Crystal",
+      "potion": "Darkness Potion"
+    },
+    "wizard": {
+      "book": "Spellbook",
+      "potion": "Mana Potion"
+    },
+    "witcher": {
+      "elixir": "Elixir",
+      "oil": "Monster Oil"
+    }
+  },
+  "loading": {
+    "alt": "Loading..."
+  },
+  "titles": {
+    "create_hero": "Create Your Hero",
+    "choose_race": "Choose a race for {{heroname}}",
+    "choose_class": "Choose a class for {{heroname}}, {{race}}"
+  },
+  "placeholders": {
+    "hero_name": "Character's Name"
+  },
+  "login": {
+    "title": "LOGIN",
+    "placeholder_email": "Username",
+    "placeholder_password": "Password",
+    "login": "Log In",
+    "register": "Register"
+  }
+}

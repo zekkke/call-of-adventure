@@ -1,0 +1,154 @@
+/* src/ChooseRace.css */
+.choose-race-container {
+  position: relative;
+  margin: 10px;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('../assets/bg1.png') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 100vw;
+  width: 100%;
+  overflow-y: auto; /* Додаємо скролінг */
+  gap: 20px; /* Додаємо відступи між елементами */
+  width: 70%; /* Переносимо ширину з .race-container */
+  max-width: 2000px; /* Переносимо максимальну ширину */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Оверлей для затемнення */
+.fade-overlay {
+  position: fixed; /* Змінюємо на fixed, щоб покривати весь екран */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Анімація для з’явлення при завантаженні */
+.fade-in {
+  animation: fadeIn 1s forwards;
+}
+
+/* Анімація для затемнення при переході */
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+/* Анімація: лише з’явлення (1 с) */
+@keyframes fadeIn {
+  0% {
+    opacity: 1; /* Початок: повністю чорний */
+  }
+  100% {
+    opacity: 0; /* Кінець: контент видимий */
+  }
+}
+
+/* Анімація: затемнення при переході (1 с) */
+@keyframes fadeOut {
+  0% {
+    opacity: 0; /* Початок: контент видимий */
+  }
+  100% {
+    opacity: 1; /* Кінець: повністю чорний */
+  }
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: white; /* Для кращої видимості */
+}
+
+.race {
+  display: flex;
+  background-color: rgba(4, 4, 4, 0.599);
+  border: 2px solid rgb(72, 253, 129);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.2s, background-color 0.3s;
+  width: 100%; /* Щоб картка займала всю ширину контейнера */
+}
+
+.race:hover {
+  transform: scale(1.02);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.race img {
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-left: 15px;
+}
+
+.race-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  color: white; /* Для кращої видимості */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Тінь для тексту */
+}
+
+.race-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.race-description {
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.race-stats {
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+}
+
+.race-hp {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.back-button {
+  position: fixed; /* Змінюємо на fixed, щоб кнопка залишалася на місці */
+  top: 1rem;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #dc1919;
+  border: 1px solid #dcdcdc;
+  border-radius: 4px;
+  z-index: 2; /* Вище за картки */
+}
+
+#loading {
+  margin: 20px auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+#loading img {
+  width: 120px;
+  height: auto;
+  opacity: 0.9;
+}

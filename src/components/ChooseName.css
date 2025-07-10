@@ -1,0 +1,132 @@
+/* src/ChooseName.css */
+.choose-name-container {
+  position: relative;    /* щоб псевдо- та абсолютні елементи працювали відносно цього блоку */
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* центруємо контент по горизонталі */
+  justify-content: center;
+  min-height: 100vh;
+  background: url('../assets/bg1.png') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  padding: 2rem;
+  width: 100%;
+}
+
+/* Анімація для затемнення при завантаженні */
+.fade-in-out {
+  animation: fadeInOut 2s forwards;
+}
+
+/* Анімація для затемнення при переході */
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+/* Анімація: з’явлення (1 с) і затемнення (1 с) */
+@keyframes fadeIn {
+  0% {
+    opacity: 1; /* Початок: повністю чорний */
+  }
+  100% {
+    opacity: 0; /* Кінець: контент видимий */
+  }
+}
+
+/* Анімація: тільки затемнення (при переході) */
+@keyframes fadeOut {
+  0% {
+    opacity: 0; /* Початок: контент видимий */
+  }
+  100% {
+    opacity: 1; /* Кінець: повністю чорний */
+  }
+}
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    
+  }
+  
+  input {
+  padding: 0.75rem; /* Збільшуємо відступи */
+  font-size: 1.2rem; /* Збільшуємо шрифт */
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  width: 300px; /* Збільшуємо ширину поля */
+  margin: 0 auto; /* Центруємо поле */
+}
+
+  /* 2) Збільшуємо та точно центруємо input */
+.choose-name-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* важливо, щоб input і група кнопок були по центру */
+  gap: 1.5rem;           /* менший відступ між input і кнопкою */
+}
+
+.choose-name-container input {
+  width: 300px;          /* збільшили ширину */
+  padding: 1rem;         /* трохи більше padding */
+  font-size: 1.15rem;    /* більший текст */
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+}
+  
+  button {
+    width: 200px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: white;
+    border: 2px solid white !important;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+  
+  .error {
+    color: red;
+    margin-top: 1rem;
+  }
+
+  .back-button {
+    position: absolute; /* Розташовуємо у верхньому лівому куті */
+    top: 10px;
+    left: 10px;
+    width: 120px; /* Менша ширина для кнопки "Назад" */
+    padding: 0.4rem 0.8rem; /* Менші відступи */
+    font-size: 0.9rem; /* Менший шрифт */
+    background-color: rgba(0, 0, 0, 0.111)!important;
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+
+

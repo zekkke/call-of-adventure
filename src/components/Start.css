@@ -1,0 +1,372 @@
+.start-container {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('../assets/bg.png') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 0px;
+  min-width: 100vw;
+  width: 100%;
+  position: relative;
+}
+
+@font-face {
+  font-family: 'GreatVibes';
+  src: url('../assets/fonts/GreatVibes-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/oblivion-font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.lang-selection {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  width: 250px;    /* підганяєте під реальний розмір вашого scroll */
+  height: 150px;
+  padding-left: 40px;
+  padding-bottom: 10px;   /* підганяєте теж */
+  background: url('../assets/language-scroll.png') no-repeat center/contain;
+  display: flex;
+  
+  align-items: center;
+  pointer-events: all;
+  z-index: 1002;
+}
+
+/* “гарячі” кнопки, накладаються точно на щитки */
+.lang-btn {
+  padding: 40px 20px 10px 20px !important; /* підганяєте під розмір кожного щитка */
+  margin: 10px 5px 10px 10px !important; /* підганяєте під розмір кожного щитка */
+  width: 10px !important;     /* підганяєте під розмір кожного щитка */
+  height: 20px !important;    /* підганяєте під розмір кожного щитка */
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.lang-btn:hover {
+  transform: scale(1.1);
+}
+
+/* підсвічування активної (можна наприклад трохи затемнювати) */
+.lang-btn.active {
+  /* наприклад легка тінь */
+  box-shadow: 0 0 0px rgba(255, 255, 0, 0.8);
+  border-radius: 50%;
+}
+
+/* Overlay for fading */
+.fade-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Animation for fading on load */
+.fade-in-out {
+  animation: fadeInOut 2s forwards;
+}
+
+/* Animation for fading on transition */
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+/* Animation: appear (1s) and fade out (1s) */
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Animation: only fade out (on transition) */
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.top-bar {
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  box-sizing: border-box;
+}
+
+.logo {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.logo img {
+  width: 430px;
+}
+
+.custom-login-button {
+  font-family: 'GreatVibes-Regular', 'oblivion-font';
+  width: 150px;
+  height: 120px;
+  background-image: url('../assets/custom-login-button.png');
+  background-size: 100% 100%; 
+  background-color: transparent !important;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none !important;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  padding: 53px 10px 10px 30px; 
+  align-items: center;
+  justify-content: center;
+  color: rgb(5, 5, 5);
+  font-size: 25px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.custom-login-button:hover {
+  transform: scale(1.1);
+}
+
+.menu {
+  margin-top: 0px;
+  margin-bottom: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: center;
+}
+
+.menu button {
+  font-family: 'GreatVibes-Regular', 'oblivion-font';
+  margin: 5px;
+  width: 300px;
+  height: 100px;
+  font-size: 24px;
+  color: rgb(245, 179, 11);
+  background: url('../assets/button.png') no-repeat center center;
+  background-color: transparent !important;
+  background-size: 200px 100px;
+  border: none !important;
+  cursor: pointer;
+  transition: transform 0.3s ease ;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 1px 1px 5px rgba(9, 9, 9, 0.5);
+}
+
+.menu button:hover {
+  background: url('../assets/button.png') no-repeat center center;
+  background-size: 200px 100px;
+  transform: scale(1.05) !important;
+}
+
+/* Центруюча обгортка */
+.modal-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1001;
+  pointer-events: none; /* блокує кліки крізь wrapper */
+}
+
+/* Бекдроп + блюр */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+/* сам контейнер модалки */
+.login-modal {
+  width: 600px;
+  height: 800px;
+  position: relative;
+  pointer-events: all; /* дозволяє кліки всередині */
+}
+.login-bg {
+  width:100%; height:100%;
+  display:block;
+}
+
+/* кнопка закриття */
+.modal-close {
+  position: absolute;
+  display: flex;
+  top: 80px;
+  right: 20px;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  line-height: 24px;
+  text-align: center;
+  background: transparent !important;
+  border: none !important;
+  color: #FFD966;
+  cursor: pointer;
+  z-index: 1002;
+}
+
+/* контент поверх картинки */
+.modal-content {
+  position:absolute;
+  top:12%; left:50%; transform:translateX(-50%);
+  width:80%; text-align:center;
+  pointer-events:all;
+}
+.modal-content h2 {
+  font-family: oblivion-font !important;
+  margin: 100px 15px 15px 10px;
+  font-size: 38px !important;
+  margin-bottom: 5px;
+  color:#FFD966; text-shadow:1px 1px 4px #000;
+}
+.modal-content input {
+  width:60%; 
+  padding:15px; 
+  margin:8px 20px 7px 50px;
+  background: transparent; border: none;
+  color:#bababa !important; 
+  font-size:24px; outline:none;
+  transition:background .2s;
+}
+.modal-content input::placeholder {
+  color:rgba(255, 255, 255, 0.162);
+}
+.modal-content input:focus {
+  background:transparent;
+  
+}
+
+/* Спільні налаштування для двох великих кнопок */
+.modal-content .btn-primary
+{
+  display: block;
+  width: 200px;
+  max-width: 320px;
+  margin: 18px 10px 20px 140px;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 27px;
+  color: #b3b3b3e3;
+  text-shadow: 3px 3px 6px rgba(27, 27, 27, 0.771);
+  transition: background 0.2s, transform 0.1s;
+}
+
+.modal-content .btn-secondary {
+  display: block;
+  width: 200px;
+  max-width: 320px;
+  margin: 26px 10px 10px 140px;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 23px;
+  color: #c5c5c5d1;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+  transition: background 0.2s, transform 0.1s;
+}
+
+/* Колір «Увійти» */
+.modal-content .btn-primary {
+  background: #C27B19;
+}
+.modal-content .btn-primary:hover {
+  background: #a16414;
+}
+
+/* Колір «Зареєструватися» */
+.modal-content .btn-secondary {
+  background: #8E5E0D;
+}
+.modal-content .btn-secondary:hover {
+  background: #74500a;
+}
+
+/* Кнопка Google – тільки значок */
+.modal-content .btn-google {
+  width: 50px;
+  height: 50px;
+  margin: 8px 10px 100px 10px;
+  padding: 0;
+  border: none !important;
+  background: transparent !important;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+/* Іконка всередині – щоб не розтягувалася */
+.modal-content .btn-google img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-content .btn-google:hover {
+  transform: scale(1.1);
+}
+
+/* Анімація в’їзду */
+@keyframes slide-in-blurred-tl {
+  0% {
+    transform: translate(-1000px,-1000px) skew(80deg,10deg);
+    filter: blur(40px); opacity: 0;
+  }
+  100% {
+    transform: translate(0,0) skew(0,0);
+    filter: blur(0); opacity: 1;
+  }
+}
+.slide-in-blurred-tl {
+  animation: slide-in-blurred-tl 0.8s ease-in-out forwards;
+}
+
+/* Анімація виїзду */
+@keyframes slide-out-blurred-br {
+  0% {
+    transform: translate(0,0) skew(0,0);
+    filter: blur(0); opacity: 1;
+  }
+  100% {
+    transform: translate(1000px,1000px) skew(80deg,10deg);
+    filter: blur(40px); opacity: 0;
+  }
+}
+.slide-out-blurred-br {
+  animation: slide-out-blurred-br 0.8s ease-in-out forwards;
+}
