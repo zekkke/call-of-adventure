@@ -1,0 +1,75 @@
+:root {
+  font-family: oblivion-font, system-ui, Avenir, Helvetica, Arial, sans-serif; /* Шрифт для всієї гри */
+  src: url('./assets/fonts/oblivion-font.ttf') format('truetype'); /* Шрифт для гри */
+  line-height: 1.5; /* Висота рядка для читабельності */
+  font-weight: 400; /* Товщина шрифту */
+  color: rgba(255, 255, 255, 0.87); /* Колір тексту (білий із легкою прозорістю) */
+  background-color: #1a1a1a; /* Темний фон на випадок, якщо зображення не завантажиться */
+  font-synthesis: none; /* Оптимізація шрифтів */
+  text-rendering: optimizeLegibility; /* Покращення рендерингу тексту */
+  -webkit-font-smoothing: antialiased; /* Згладжування для WebKit-браузерів */
+  -moz-osx-font-smoothing: grayscale; /* Згладжування для Firefox */
+}
+
+html,
+body,
+#root {
+  margin: 0; /* Нульові зовнішні відступи */
+  padding: 0; /* Нульові внутрішні відступи */
+  width: 100%; /* Ширина — весь екран */
+  min-height: 100vh; /* Мінімальна висота — весь в’юпорт */
+  overflow-x: hidden; /* Запобігає горизонтальній прокрутці */
+  box-sizing: border-box; /* Включає padding і border у розміри */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit; /* Успадковує box-sizing від батьків */
+}
+
+/* Стилі для посилань */
+a {
+  font-weight: 500; /* Товщина шрифту для посилань */
+  color: #646cff; /* Колір посилань */
+  text-decoration: none; /* Без підкреслення */
+}
+a:hover {
+  color: #535bf2; /* Колір при наведенні */
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+/* Стилі для заголовків */
+h1 {
+  font-size: 2.5em; /* Розмір шрифту для h1 (зменшено для адаптивності) */
+  line-height: 1.2; /* Висота рядка */
+  margin: 20px 0; /* Зовнішні відступи: 20px зверху/знизу, 0 з боків */
+  text-align: center; /* Центрування тексту */
+}
+
+
+
+/* Медіа-запит для світлої теми */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547; /* Темний колір тексту */
+    background-color: #ffffff; /* Білий фон */
+  }
+  a:hover {
+    color: #747bff; /* Колір посилань при наведенні */
+  }
+  button {
+    background-color: #0b0b0b20; /* Світлий фон кнопки */
+    color: #213547; /* Темний текст */
+  }
+  button:hover {
+    background-color: #e0e0e0; /* Світліший фон при наведенні */
+  }
+}
